@@ -11,7 +11,7 @@ import SwiftUI
 class APIManager: ObservableObject {
     
     let apiKey = "1ab1f7c880d64fe323e8e76edec25435"
-  //  @Published var movies: [Movie] = []
+    @Published var movies: [Movie] = []
     
     func loadData() {
         let apiUrl = URL(string: "https://api.themoviedb.org/3/movie/popular?api_key=\(apiKey)")!
@@ -25,10 +25,9 @@ class APIManager: ObservableObject {
             do {
                 let decoder = JSONDecoder()
                 let result = try decoder.decode(APIResult.self, from: data)
-                let movies = result.results
+                self.movies = result.results
                 
-                // Do something with the list of movies here
-                print("movie" + movies[0].title)
+                print("movie" + self.movies[0].title)
             } catch {
                 print("Error decoding JSON: \(error.localizedDescription)")
             }
