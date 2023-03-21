@@ -7,18 +7,18 @@
 
 import Foundation
 
-struct Movie: Codable {
+struct Movie: Codable, Identifiable {
     let id: Int
     let title: String
     let overview: String
     let posterURL: String?
     let releaseDate: String?
-    let voteAverage: Double?
+    let imdbScore: Double
     
     enum CodingKeys: String, CodingKey {
         case id, title, overview
         case posterURL = "poster_path"
         case releaseDate = "release_date"
-        case voteAverage = "vote_average"
+        case imdbScore = "vote_average"
     }
 }

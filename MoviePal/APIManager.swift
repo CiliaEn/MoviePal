@@ -14,6 +14,7 @@ class APIManager: ObservableObject {
     @Published var movies: [Movie] = []
     
     func loadData() {
+        //popular movies, change this later to take in a parameter
         let apiUrl = URL(string: "https://api.themoviedb.org/3/movie/popular?api_key=\(apiKey)")!
 
         let task = URLSession.shared.dataTask(with: apiUrl) { data, response, error in
@@ -27,7 +28,7 @@ class APIManager: ObservableObject {
                 let result = try decoder.decode(APIResult.self, from: data)
                 self.movies = result.results
                 
-                print("movie" + self.movies[0].title)
+                print("Success decoding movies")
             } catch {
                 print("Error decoding JSON: \(error.localizedDescription)")
             }

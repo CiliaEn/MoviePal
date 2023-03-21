@@ -21,7 +21,7 @@ struct ContentView: View {
                 .tabItem {
                     Label("Second", systemImage: "2.circle")
                 }
-            FavoriteView()
+            FavoritesView()
                 .tabItem {
                     Label("Third", systemImage: "3.circle")
                 }
@@ -32,26 +32,11 @@ struct ContentView: View {
     }
 }
 
-struct PopularMoviesView: View {
-    
-    var body: some View {
-        Text("Popular Movies View")
-    }
-}
 
-struct SearchView: View {
-    
-    var body: some View {
-        Text("Search view")
-    }
-}
 
-struct FavoriteView: View {
-    
-    var body: some View {
-        Text("Favorite View")
-    }
-}
+
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
