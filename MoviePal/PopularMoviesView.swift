@@ -58,9 +58,16 @@ struct ListView : View {
 struct MovieView : View {
 
     let movie : Movie
-
+    @State private var isFilled = false
+    
     var body: some View {
         Text(movie.title)
+        Button(action: {
+            self.isFilled.toggle()
+            // isFilled ?  addToFavorites() : removeFromFavorites()
+        }) {
+            Image(systemName: isFilled ? "heart.fill" : "heart")
+        }
     }
 }
 
