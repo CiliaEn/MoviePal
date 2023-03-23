@@ -19,8 +19,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 }
 
 @main
-struct YourApp: App {
-  // register app delegate for Firebase setup
+struct MoviePalApp: App {
+  
   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
 

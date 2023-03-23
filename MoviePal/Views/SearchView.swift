@@ -9,16 +9,17 @@ import SwiftUI
 
 struct SearchView: View {
     
-    @ObservedObject var manager = APIManager()
+    let apiManager : APIManager
+    let userManager : UserManager
     @State var searchText = ""
     
     var searchResults: [Movie] {
         if searchText.isEmpty {
-            manager.loadData()
-            return manager.movies
+            apiManager.loadData()
+            return apiManager.movies
         } else {
-            manager.loadData(searchWord: searchText)
-            return manager.movies
+            apiManager.loadData(searchWord: searchText)
+            return apiManager.movies
         }
     }
     
@@ -28,7 +29,7 @@ struct SearchView: View {
             List {
                 ForEach(searchResults, id: \.self) { movie in
                     NavigationLink(
-                        destination: MovieView(movie: movie),
+                        destination: MovieView(movie: movie, userManager: userManager),
                         label: {
                             ListView(movie: movie)
                         }
@@ -38,15 +39,8 @@ struct SearchView: View {
         }
         .searchable(text: $searchText)
         .onAppear {
-            manager.loadData(searchWord: searchText)
+            apiManager.loadData(searchWord: searchText)
         }
     }
 }
 
-
-
-struct SearchView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchView()
-    }
-}

@@ -24,6 +24,7 @@
 		74B6D02629CB26EA002FF462 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B6D02529CB26EA002FF462 /* LogInView.swift */; };
 		74B6D02829CB2784002FF462 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B6D02729CB2784002FF462 /* SplashScreenView.swift */; };
 		74B6D02A29CB3438002FF462 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B6D02929CB3438002FF462 /* User.swift */; };
+		74B6D02F29CB44FA002FF462 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B6D02E29CB44FA002FF462 /* UserManager.swift */; };
 		74B8E5D029C8773F00E870E4 /* MoviePalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B8E5CF29C8773F00E870E4 /* MoviePalApp.swift */; };
 		74B8E5D229C8773F00E870E4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B8E5D129C8773F00E870E4 /* ContentView.swift */; };
 		74B8E5D429C8774400E870E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74B8E5D329C8774400E870E4 /* Assets.xcassets */; };
@@ -60,6 +61,7 @@
 		74B6D02529CB26EA002FF462 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		74B6D02729CB2784002FF462 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		74B6D02929CB3438002FF462 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		74B6D02E29CB44FA002FF462 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		74B8E5CC29C8773F00E870E4 /* MoviePal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviePal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74B8E5CF29C8773F00E870E4 /* MoviePalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePalApp.swift; sourceTree = "<group>"; };
 		74B8E5D129C8773F00E870E4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -105,6 +107,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		74B6D02B29CB38CF002FF462 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				74B6D02729CB2784002FF462 /* SplashScreenView.swift */,
+				74B6D02529CB26EA002FF462 /* LogInView.swift */,
+				74B8E5D129C8773F00E870E4 /* ContentView.swift */,
+				748D8BD629C9F6170072832F /* PopularMoviesView.swift */,
+				748D8BD829C9F6330072832F /* SearchView.swift */,
+				748D8BDA29C9F6470072832F /* FavoritesView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		74B6D02C29CB38F1002FF462 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				74B6D02929CB3438002FF462 /* User.swift */,
+				748D8BC129C888F50072832F /* Movie.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		74B6D02D29CB38FF002FF462 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				748D8BBF29C886650072832F /* APIManager.swift */,
+				74B6D02E29CB44FA002FF462 /* UserManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		74B8E5C329C8773F00E870E4 = {
 			isa = PBXGroup;
 			children = (
@@ -129,15 +162,9 @@
 			isa = PBXGroup;
 			children = (
 				74B8E5CF29C8773F00E870E4 /* MoviePalApp.swift */,
-				74B8E5D129C8773F00E870E4 /* ContentView.swift */,
-				74B6D02529CB26EA002FF462 /* LogInView.swift */,
-				74B6D02929CB3438002FF462 /* User.swift */,
-				748D8BD629C9F6170072832F /* PopularMoviesView.swift */,
-				74B6D02729CB2784002FF462 /* SplashScreenView.swift */,
-				748D8BDA29C9F6470072832F /* FavoritesView.swift */,
-				748D8BD829C9F6330072832F /* SearchView.swift */,
-				748D8BBF29C886650072832F /* APIManager.swift */,
-				748D8BC129C888F50072832F /* Movie.swift */,
+				74B6D02D29CB38FF002FF462 /* Managers */,
+				74B6D02C29CB38F1002FF462 /* Classes */,
+				74B6D02B29CB38CF002FF462 /* Views */,
 				74B8E5D329C8774400E870E4 /* Assets.xcassets */,
 				748D8BC329C8A33C0072832F /* GoogleService-Info.plist */,
 				74B8E5D529C8774400E870E4 /* Preview Content */,
@@ -323,6 +350,7 @@
 				748D8BD929C9F6330072832F /* SearchView.swift in Sources */,
 				74B6D02629CB26EA002FF462 /* LogInView.swift in Sources */,
 				74B6D02A29CB3438002FF462 /* User.swift in Sources */,
+				74B6D02F29CB44FA002FF462 /* UserManager.swift in Sources */,
 				74B8E5D029C8773F00E870E4 /* MoviePalApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

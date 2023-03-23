@@ -11,7 +11,7 @@ import SwiftUI
 class APIManager: ObservableObject {
     
     let apiKey = "1ab1f7c880d64fe323e8e76edec25435"
-    @Published var movies: [Movie] = []
+    @Published var movies = [Movie]()
     
     func loadData(searchWord: String? = nil) {
         
