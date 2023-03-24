@@ -11,7 +11,7 @@ struct PopularMoviesView: View {
 
     @ObservedObject var apiManager : APIManager
     @ObservedObject var userManager : UserManager
-    @State var movies = [Movie]()
+  //  @State var movies = [Movie]()
 
     @State var selectedSortingOption = "Title"
     
@@ -31,7 +31,7 @@ struct PopularMoviesView: View {
         VStack{
             FilterView(selectedOption: $selectedSortingOption)
             List {
-                ForEach(movies) { movie in
+                ForEach(sortedMovies) { movie in
                    
                     NavigationLink(
                         destination: MovieView(movie: movie, userManager: userManager),
@@ -43,7 +43,7 @@ struct PopularMoviesView: View {
             }
             .onAppear {
                 apiManager.loadData()
-                loadFavorites()
+               // loadFavorites()
                 
             }
         }
@@ -51,24 +51,24 @@ struct PopularMoviesView: View {
        
     }
     
-    func loadFavorites() {
-        
-            for apiMovie in sortedMovies {
-                
-                var movie = Movie(id: apiMovie.id, title: apiMovie.title, overview: apiMovie.overview, posterURL: apiMovie.posterURL, releaseDate: apiMovie.releaseDate, imdbScore: apiMovie.imdbScore)
-                
-                if let user = userManager.user {
-                for userMovie in user.favoriteMovies {
-                    if apiMovie == userMovie {
-                        movie.isFavorite = true
-                        break
-                    }
-                }
-            }
-                movies.append(movie)
-        }
-       
-    }
+//    func loadFavorites() {
+//
+//            for apiMovie in sortedMovies {
+//
+//                var movie = Movie(id: apiMovie.id, title: apiMovie.title, overview: apiMovie.overview, posterURL: apiMovie.posterURL, releaseDate: apiMovie.releaseDate, imdbScore: apiMovie.imdbScore)
+//
+//                if let user = userManager.user {
+//                for userMovie in user.favoriteMovies {
+//                    if apiMovie == userMovie {
+//                        movie.isFavorite = true
+//                        break
+//                    }
+//                }
+//            }
+//                movies.append(movie)
+//        }
+//
+//    }
     
 }
 
@@ -94,19 +94,26 @@ struct MovieView : View {
     var body: some View {
         Text(movie.title)
         Button(action: {
-            (movie.isFavorite).toggle()
-                if let user = userManager.user{
-                    if (movie.isFavorite) {
-                        user.addMovie(movie: movie)
-                } else {
+            if let user = userManager.user{
+                // (movie.isFavorite).toggle()
+                
+                if (user.checkForFavorite(movie: movie)) {
                     user.removeMovie(movie: movie)
+                } else {
+                    user.addMovie(movie: movie)
                 }
-                    userManager.saveUserToFirestore()
+                userManager.saveUserToFirestore()
             } else {
                 print("You have to log in to favorite movies")
             }
-        }) {
-            Image(systemName: movie.isFavorite ? "heart.fill" : "heart")
+        }) {            if let user = userManager.user{
+                Image(systemName: user.checkForFavorite(movie: movie) ? "heart.fill" : "heart")
+            } else {
+                Image(systemName: "heart")
+            }
+        
+            
+            
         }
     }
 }

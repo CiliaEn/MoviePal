@@ -12,6 +12,7 @@ struct SearchView: View {
     let apiManager : APIManager
     let userManager : UserManager
     @State var searchText = ""
+ 
     
     var searchResults: [Movie] {
         if searchText.isEmpty {
@@ -42,7 +43,9 @@ struct SearchView: View {
         .searchable(text: $searchText)
         .onAppear {
             apiManager.loadData(searchWord: searchText)
+   
         }
     }
+  
 }
 

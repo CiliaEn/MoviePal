@@ -31,4 +31,12 @@ class User : Codable, ObservableObject {
             print("movie removed from favorites")
         }
     }
+    func checkForFavorite(movie: Movie) -> Bool {
+        
+        if (favoriteMovies.contains(movie)) {
+            return true
+        } else {
+            return false
+        }
+    }
 }
