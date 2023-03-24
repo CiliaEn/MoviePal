@@ -19,8 +19,8 @@ struct PopularMoviesView: View {
         switch selectedSortingOption {
         case "IMDb Score":
             return apiManager.movies.sorted { $0.imdbScore > $1.imdbScore }
-        //case "Release Date":
-      //      return manager.movies.sorted { $0.releaseDate > $1.releaseDate }
+        case "Release Date":
+            return apiManager.movies.sorted { $0.releaseDate > $1.releaseDate }
         default:
            // apiManager.loadData()
             return apiManager.movies
@@ -64,11 +64,8 @@ struct PopularMoviesView: View {
                         break
                     }
                 }
-                
-                
             }
                 movies.append(movie)
-            
         }
        
     }

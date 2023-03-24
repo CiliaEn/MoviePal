@@ -15,11 +15,11 @@ struct LogInView: View {
     @State private var password = ""
     @State private var isLoggingIn = true
     @State private var loggedIn = false
-    @ObservedObject var userManager = UserManager()
+    @ObservedObject var userManager : UserManager
     
     var body: some View {
         if loggedIn {
-            ContentView()
+            ContentView(userManager: userManager)
                 
         } else{
             VStack {
@@ -110,8 +110,3 @@ struct LogInView: View {
 }
 
 
-struct LogInView_Previews: PreviewProvider {
-    static var previews: some View {
-        LogInView()
-    }
-}

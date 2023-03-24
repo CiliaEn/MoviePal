@@ -12,42 +12,38 @@ import FirebaseAuth
 
 struct ContentView: View {
     
-    @ObservedObject var userManager = UserManager()
+    @ObservedObject var userManager : UserManager
     @ObservedObject var apiManager = APIManager()
     
     var body: some View {
         VStack{
-            if (userManager.user == nil){
-                LogInView()
-            } else {
-                TabView {
-                    NavigationView {
-                        PopularMoviesView( apiManager: apiManager, userManager: userManager)
-                    }
-                    .tabItem {
-                        Label("First", systemImage: "1.circle")
-                    }
-                    
-                    NavigationView {
-                        SearchView(apiManager: apiManager, userManager: userManager)
-                    }
-                    .tabItem {
-                        Label("Second", systemImage: "2.circle")
-                    }
-                    NavigationView {
-                        FavoritesView(apiManager: apiManager, userManager: userManager)
-                    }
-                    .tabItem {
-                        Label("Third", systemImage: "3.circle")
-                    }
+            
+            TabView {
+                NavigationView {
+                    PopularMoviesView( apiManager: apiManager, userManager: userManager)
+                }
+                .tabItem {
+                    Label("First", systemImage: "1.circle")
+                }
+                
+                NavigationView {
+                    SearchView(apiManager: apiManager, userManager: userManager)
+                }
+                .tabItem {
+                    Label("Second", systemImage: "2.circle")
+                }
+                NavigationView {
+                    FavoritesView(apiManager: apiManager, userManager: userManager)
+                }
+                .tabItem {
+                    Label("Third", systemImage: "3.circle")
                 }
             }
         }
-            .onAppear {
-                apiManager.loadData()
-                userManager.getUser()
-            }
-        
+        .onAppear {
+            apiManager.loadData()
+            userManager.getUser()
+        }
     }
 }
 
@@ -57,8 +53,4 @@ struct ContentView: View {
 
 
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+

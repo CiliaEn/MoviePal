@@ -11,8 +11,8 @@ struct Movie: Codable, Identifiable, Hashable {
     let id: Int
     let title: String
     let overview: String
-    let posterURL: String?
-    let releaseDate: String?
+    let posterURL: String
+    let releaseDate: String
     let imdbScore: Double
     var isFavorite = false
     

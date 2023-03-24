@@ -15,8 +15,10 @@ struct SearchView: View {
     
     var searchResults: [Movie] {
         if searchText.isEmpty {
-            apiManager.loadData()
-            return apiManager.movies
+          //  apiManager.loadData()
+         //   return apiManager.movies
+            var emptyList = [Movie]()
+            return emptyList
         } else {
             apiManager.loadData(searchWord: searchText)
             return apiManager.movies

@@ -9,40 +9,51 @@ import SwiftUI
 
 struct SplashScreenView: View {
     
-    @State private var isActive = false
+    @State private var loaded = false
     @State private var size = 0.8
     @State private var opacity = 0.5
+    @ObservedObject var userManager = UserManager()
     
     var body: some View {
         
-        if isActive {
-            ContentView()
-        } else{
-            VStack{
+        VStack {
+            
+            if loaded {
+                if (userManager.user == nil) {
+                    LogInView(userManager: userManager)
+                } else {
+                    ContentView(userManager: userManager)
+                }
+            } else{
                 VStack{
-                    Image(systemName: "camera.macro")
-                        .font(.system(size: 80))
-                        .foregroundColor(Color(red: 0.86, green: 0.64, blue: 1.13))
-                    Text("MoviePal")
-                        .font(Font.custom("Avenir", size: 26))
-                        .foregroundColor(.black.opacity(0.80))
+                    VStack{
+                        Image(systemName: "camera.macro")
+                            .font(.system(size: 80))
+                            .foregroundColor(Color(red: 0.86, green: 0.64, blue: 1.13))
+                        Text("MoviePal")
+                            .font(Font.custom("Avenir", size: 26))
+                            .foregroundColor(.black.opacity(0.80))
+                    }
+                    .scaleEffect(size)
+                    .opacity(opacity)
+                    .onAppear {
+                        withAnimation(.easeIn(duration: 1.4)){
+                            self.size = 0.9
+                            self.opacity = 1.0
+                        }
+                    }
                 }
-                .scaleEffect(size)
-                .opacity(opacity)
                 .onAppear {
-                    withAnimation(.easeIn(duration: 1.2)){
-                        self.size = 0.9
-                        self.opacity = 1.0
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        withAnimation{
+                            self.loaded = true
+                        }
                     }
                 }
             }
-            .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    withAnimation{
-                        self.isActive = true
-                    }
-                }
-            }
+        }
+        .onAppear {
+            userManager.getUser()
         }
     }
 }
