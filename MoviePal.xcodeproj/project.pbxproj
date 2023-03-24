@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		748D8BC029C886650072832F /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D8BBF29C886650072832F /* APIManager.swift */; };
+		748D8BC229C888F50072832F /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D8BC129C888F50072832F /* Movie.swift */; };
+		748D8BC429C8A33C0072832F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 748D8BC329C8A33C0072832F /* GoogleService-Info.plist */; };
+		748D8BC729C8A62B0072832F /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 748D8BC629C8A62B0072832F /* FirebaseAuth */; };
+		748D8BC929C8A62B0072832F /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 748D8BC829C8A62B0072832F /* FirebaseDatabase */; };
+		748D8BCB29C8A62B0072832F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 748D8BCA29C8A62B0072832F /* FirebaseFirestore */; };
+		748D8BCD29C8A62B0072832F /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 748D8BCC29C8A62B0072832F /* FirebaseFirestoreCombine-Community */; };
+		748D8BCF29C8A62B0072832F /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 748D8BCE29C8A62B0072832F /* FirebaseFirestoreSwift */; };
+		748D8BD129C8A62B0072832F /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 748D8BD029C8A62B0072832F /* FirebaseFunctions */; };
+		748D8BD329C8A62B0072832F /* FirebaseFunctionsCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 748D8BD229C8A62B0072832F /* FirebaseFunctionsCombine-Community */; };
+		748D8BD529C8A62B0072832F /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 748D8BD429C8A62B0072832F /* FirebaseStorage */; };
+		748D8BD729C9F6170072832F /* PopularMoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D8BD629C9F6170072832F /* PopularMoviesView.swift */; };
+		748D8BD929C9F6330072832F /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D8BD829C9F6330072832F /* SearchView.swift */; };
+		748D8BDB29C9F6470072832F /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D8BDA29C9F6470072832F /* FavoritesView.swift */; };
+		74B6D02629CB26EA002FF462 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B6D02529CB26EA002FF462 /* LogInView.swift */; };
+		74B6D02829CB2784002FF462 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B6D02729CB2784002FF462 /* SplashScreenView.swift */; };
+		74B6D02A29CB3438002FF462 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B6D02929CB3438002FF462 /* User.swift */; };
+		74B6D02F29CB44FA002FF462 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B6D02E29CB44FA002FF462 /* UserManager.swift */; };
 		74B8E5D029C8773F00E870E4 /* MoviePalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B8E5CF29C8773F00E870E4 /* MoviePalApp.swift */; };
 		74B8E5D229C8773F00E870E4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B8E5D129C8773F00E870E4 /* ContentView.swift */; };
 		74B8E5D429C8774400E870E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74B8E5D329C8774400E870E4 /* Assets.xcassets */; };
@@ -34,6 +52,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		748D8BBF29C886650072832F /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		748D8BC129C888F50072832F /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		748D8BC329C8A33C0072832F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		748D8BD629C9F6170072832F /* PopularMoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesView.swift; sourceTree = "<group>"; };
+		748D8BD829C9F6330072832F /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		748D8BDA29C9F6470072832F /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		74B6D02529CB26EA002FF462 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
+		74B6D02729CB2784002FF462 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
+		74B6D02929CB3438002FF462 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		74B6D02E29CB44FA002FF462 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		74B8E5CC29C8773F00E870E4 /* MoviePal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviePal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74B8E5CF29C8773F00E870E4 /* MoviePalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePalApp.swift; sourceTree = "<group>"; };
 		74B8E5D129C8773F00E870E4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -51,6 +79,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				748D8BD329C8A62B0072832F /* FirebaseFunctionsCombine-Community in Frameworks */,
+				748D8BCF29C8A62B0072832F /* FirebaseFirestoreSwift in Frameworks */,
+				748D8BC929C8A62B0072832F /* FirebaseDatabase in Frameworks */,
+				748D8BCD29C8A62B0072832F /* FirebaseFirestoreCombine-Community in Frameworks */,
+				748D8BD129C8A62B0072832F /* FirebaseFunctions in Frameworks */,
+				748D8BD529C8A62B0072832F /* FirebaseStorage in Frameworks */,
+				748D8BC729C8A62B0072832F /* FirebaseAuth in Frameworks */,
+				748D8BCB29C8A62B0072832F /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +107,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		74B6D02B29CB38CF002FF462 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				74B6D02729CB2784002FF462 /* SplashScreenView.swift */,
+				74B6D02529CB26EA002FF462 /* LogInView.swift */,
+				74B8E5D129C8773F00E870E4 /* ContentView.swift */,
+				748D8BD629C9F6170072832F /* PopularMoviesView.swift */,
+				748D8BD829C9F6330072832F /* SearchView.swift */,
+				748D8BDA29C9F6470072832F /* FavoritesView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		74B6D02C29CB38F1002FF462 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				74B6D02929CB3438002FF462 /* User.swift */,
+				748D8BC129C888F50072832F /* Movie.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		74B6D02D29CB38FF002FF462 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				748D8BBF29C886650072832F /* APIManager.swift */,
+				74B6D02E29CB44FA002FF462 /* UserManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		74B8E5C329C8773F00E870E4 = {
 			isa = PBXGroup;
 			children = (
@@ -95,8 +162,11 @@
 			isa = PBXGroup;
 			children = (
 				74B8E5CF29C8773F00E870E4 /* MoviePalApp.swift */,
-				74B8E5D129C8773F00E870E4 /* ContentView.swift */,
+				74B6D02D29CB38FF002FF462 /* Managers */,
+				74B6D02C29CB38F1002FF462 /* Classes */,
+				74B6D02B29CB38CF002FF462 /* Views */,
 				74B8E5D329C8774400E870E4 /* Assets.xcassets */,
+				748D8BC329C8A33C0072832F /* GoogleService-Info.plist */,
 				74B8E5D529C8774400E870E4 /* Preview Content */,
 			);
 			path = MoviePal;
@@ -143,6 +213,16 @@
 			dependencies = (
 			);
 			name = MoviePal;
+			packageProductDependencies = (
+				748D8BC629C8A62B0072832F /* FirebaseAuth */,
+				748D8BC829C8A62B0072832F /* FirebaseDatabase */,
+				748D8BCA29C8A62B0072832F /* FirebaseFirestore */,
+				748D8BCC29C8A62B0072832F /* FirebaseFirestoreCombine-Community */,
+				748D8BCE29C8A62B0072832F /* FirebaseFirestoreSwift */,
+				748D8BD029C8A62B0072832F /* FirebaseFunctions */,
+				748D8BD229C8A62B0072832F /* FirebaseFunctionsCombine-Community */,
+				748D8BD429C8A62B0072832F /* FirebaseStorage */,
+			);
 			productName = MoviePal;
 			productReference = 74B8E5CC29C8773F00E870E4 /* MoviePal.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +295,9 @@
 				Base,
 			);
 			mainGroup = 74B8E5C329C8773F00E870E4;
+			packageReferences = (
+				748D8BC529C8A62B0072832F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 74B8E5CD29C8773F00E870E4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -233,6 +316,7 @@
 			files = (
 				74B8E5D729C8774400E870E4 /* Preview Assets.xcassets in Resources */,
 				74B8E5D429C8774400E870E4 /* Assets.xcassets in Resources */,
+				748D8BC429C8A33C0072832F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,7 +341,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				748D8BC029C886650072832F /* APIManager.swift in Sources */,
 				74B8E5D229C8773F00E870E4 /* ContentView.swift in Sources */,
+				74B6D02829CB2784002FF462 /* SplashScreenView.swift in Sources */,
+				748D8BD729C9F6170072832F /* PopularMoviesView.swift in Sources */,
+				748D8BC229C888F50072832F /* Movie.swift in Sources */,
+				748D8BDB29C9F6470072832F /* FavoritesView.swift in Sources */,
+				748D8BD929C9F6330072832F /* SearchView.swift in Sources */,
+				74B6D02629CB26EA002FF462 /* LogInView.swift in Sources */,
+				74B6D02A29CB3438002FF462 /* User.swift in Sources */,
+				74B6D02F29CB44FA002FF462 /* UserManager.swift in Sources */,
 				74B8E5D029C8773F00E870E4 /* MoviePalApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -577,6 +670,60 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		748D8BC529C8A62B0072832F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		748D8BC629C8A62B0072832F /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 748D8BC529C8A62B0072832F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		748D8BC829C8A62B0072832F /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 748D8BC529C8A62B0072832F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		748D8BCA29C8A62B0072832F /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 748D8BC529C8A62B0072832F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		748D8BCC29C8A62B0072832F /* FirebaseFirestoreCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 748D8BC529C8A62B0072832F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFirestoreCombine-Community";
+		};
+		748D8BCE29C8A62B0072832F /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 748D8BC529C8A62B0072832F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		748D8BD029C8A62B0072832F /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 748D8BC529C8A62B0072832F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
+		};
+		748D8BD229C8A62B0072832F /* FirebaseFunctionsCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 748D8BC529C8A62B0072832F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFunctionsCombine-Community";
+		};
+		748D8BD429C8A62B0072832F /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 748D8BC529C8A62B0072832F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 74B8E5C429C8773F00E870E4 /* Project object */;
 }
