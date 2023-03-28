@@ -14,12 +14,13 @@ struct Movie: Codable, Identifiable, Hashable {
     let posterURL: String
     let releaseDate: String
     let imdbScore: Double
-   // var isFavorite = false
+    let language: String
     
     enum CodingKeys: String, CodingKey {
         case id, title, overview
         case posterURL = "poster_path"
         case releaseDate = "release_date"
         case imdbScore = "vote_average"
+        case language = "original_language"
     }
 }

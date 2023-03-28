@@ -21,9 +21,7 @@ struct FavoritesView: View {
                     }
                 }
             }
-           // .onAppear {
-            //    userManager.signOut()
-          //  }
+           
             
         }
     }
