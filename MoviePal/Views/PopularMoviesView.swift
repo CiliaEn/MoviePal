@@ -31,22 +31,25 @@ struct PopularMoviesView: View {
             FilterView(selectedOption: $selectedSortingOption)
             ScrollView{
                 LazyVGrid(columns: columns) {
-                    ForEach(sortedMovies) { movie in
-                        
-                        NavigationLink(
-                            destination: MovieView(movie: movie, userManager: userManager),
-                            label: {
-                                ListView(movie: movie)
-                            }
-                        )
-                    }
+            
+                ForEach(sortedMovies) { movie in
+                    
+                    NavigationLink(
+                        destination: MovieView(movie: movie, userManager: userManager),
+                        label: {
+                            ListView(movie: movie)
+                        }
+                    )
+                               }
                 }
+            }
             }
             .onAppear {
                 apiManager.loadData()
                 userManager.getUser()
+                print("popularview: \(apiManager.movies)")
             }
-        }
+      
     }
 }
 

@@ -15,15 +15,25 @@ class APIManager: ObservableObject {
     
     func loadData(searchWord: String? = nil) {
         
-        let apiUrl: URL
+        var apiUrl = URL(string: "")
         
         if let searchWord = searchWord {
-             apiUrl = URL(string:"https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&query=\(searchWord)")!
+            if let url = URL(string:"https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&query=\(searchWord)") {
+                apiUrl = url
+            }
+             
         } else {
-             apiUrl = URL(string: "https://api.themoviedb.org/3/movie/popular?api_key=\(apiKey)")!
+            if let url = URL(string: "https://api.themoviedb.org/3/movie/popular?api_key=\(apiKey)") {
+                apiUrl = url
+            }
+           
         }
+        guard let url = apiUrl else {
+                print("Error: Invalid URL")
+                return
+            }
         
-        let task = URLSession.shared.dataTask(with: apiUrl) { data, response, error in
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else {
                 print("Error: No data returned from API.")
                 return
@@ -32,9 +42,9 @@ class APIManager: ObservableObject {
             do {
                 let decoder = JSONDecoder()
                 let result = try decoder.decode(APIResult.self, from: data)
+                
                 self.movies = result.results
                 
-                print("Success decoding movies")
             } catch {
                 print("Error decoding JSON: \(error.localizedDescription)")
             }
@@ -47,4 +57,6 @@ class APIManager: ObservableObject {
 struct APIResult: Codable {
     let page: Int
     let results: [Movie]
+    let total_pages: Int
+    let total_results: Int
 }
