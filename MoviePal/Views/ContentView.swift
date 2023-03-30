@@ -41,8 +41,7 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            apiManager.loadData()
-           // print("contentview: \(apiManager.movies[0])")
+           
         userManager.getUser()
         }
     }

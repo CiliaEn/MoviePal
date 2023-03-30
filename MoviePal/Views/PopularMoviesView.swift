@@ -29,27 +29,29 @@ struct PopularMoviesView: View {
     var body: some View {
         VStack{
             FilterView(selectedOption: $selectedSortingOption)
-            ScrollView{
-                LazyVGrid(columns: columns) {
-            
-                ForEach(sortedMovies) { movie in
-                    
-                    NavigationLink(
-                        destination: MovieView(movie: movie, userManager: userManager),
-                        label: {
-                            ListView(movie: movie)
-                        }
-                    )
-                               }
+           
+                ScrollView{
+                    LazyVGrid(columns: columns) {
+
+                        ForEach(sortedMovies) { movie in
+
+                        NavigationLink(
+                            destination: MovieView(movie: movie, userManager: userManager),
+                            label: {
+                                ListView(movie: movie)
+                            }
+                        )
+                                   }
+                    }
                 }
             }
-            }
-            .onAppear {
-                apiManager.loadData()
-                userManager.getUser()
-                print("popularview: \(apiManager.movies)")
-            }
-      
+        
+        .onAppear {
+            
+            userManager.getUser()
+            
+        }
+  
     }
 }
 
