@@ -37,7 +37,6 @@ struct LogInView: View {
                     .cornerRadius(5.0)
                     .padding(.bottom, 20)
                 Button(action: {
-                    // Login or signup button action
                     if isLoggingIn {
                         login()
                     } else {
@@ -72,12 +71,12 @@ struct LogInView: View {
                 print("Error logging in \(error)")
             } else {
                 // Login successful
-                userManager.getUser()
+                print("Logging in...")
                 loggedIn = true
                 
             }
         }
-        print("Logging in...")
+        
     }
     
     func signup() {

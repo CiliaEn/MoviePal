@@ -11,9 +11,9 @@ struct PopularMoviesView: View {
 
     @ObservedObject var apiManager : APIManager
     @ObservedObject var userManager : UserManager
-  //  @State var movies = [Movie]()
 
     @State var selectedSortingOption = "Title"
+    let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     
     var sortedMovies: [Movie] {
         switch selectedSortingOption {
@@ -22,7 +22,6 @@ struct PopularMoviesView: View {
         case "Release Date":
             return apiManager.movies.sorted { $0.releaseDate > $1.releaseDate }
         default:
-           // apiManager.loadData()
             return apiManager.movies
         }
     }
@@ -30,91 +29,142 @@ struct PopularMoviesView: View {
     var body: some View {
         VStack{
             FilterView(selectedOption: $selectedSortingOption)
-            List {
-                ForEach(sortedMovies) { movie in
-                   
-                    NavigationLink(
-                        destination: MovieView(movie: movie, userManager: userManager),
-                        label: {
-                            ListView(movie: movie)
-                        }
-                    )
+           
+                ScrollView{
+                    LazyVGrid(columns: columns) {
+
+                        ForEach(sortedMovies) { movie in
+
+                        NavigationLink(
+                            destination: MovieView(movie: movie, userManager: userManager),
+                            label: {
+                                ListView(movie: movie)
+                            }
+                        )
+                                   }
+                    }
                 }
             }
-            .onAppear {
-                apiManager.loadData()
-               // loadFavorites()
-                
-            }
-        }
         
-       
+        .onAppear {
+            
+            userManager.getUser()
+            
+        }
+  
     }
-    
-//    func loadFavorites() {
-//
-//            for apiMovie in sortedMovies {
-//
-//                var movie = Movie(id: apiMovie.id, title: apiMovie.title, overview: apiMovie.overview, posterURL: apiMovie.posterURL, releaseDate: apiMovie.releaseDate, imdbScore: apiMovie.imdbScore)
-//
-//                if let user = userManager.user {
-//                for userMovie in user.favoriteMovies {
-//                    if apiMovie == userMovie {
-//                        movie.isFavorite = true
-//                        break
-//                    }
-//                }
-//            }
-//                movies.append(movie)
-//        }
-//
-//    }
-    
 }
 
-struct ListView : View {
-
-    let movie : Movie
-
+struct ListView: View {
+    
+    let movie: Movie
+    
+    @State private var posterImage: UIImage?
+    
     var body: some View {
-        HStack{
+        VStack {
+            if let image = posterImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 90, height: 120)
+                    .cornerRadius(10)
+            } else {
+                Color.gray
+                    .frame(width: 80, height: 120)
+                    .cornerRadius(10)
+            }
+            
+            VStack(alignment: .leading, spacing: 8) {
+                Text(movie.title)
+                    .font(.system(size: 12, weight: .regular))
+                    .foregroundColor(.black)
+                Text(String(format: "%.1f", movie.imdbScore))
+                    .font(.system(size: 10, weight: .regular))
+                    .foregroundColor(.black)
+            }
+            Spacer()
+        }
+        .onAppear {
+            loadPoster()
+        }
+    }
+    
+    func loadPoster() {
+        guard let url = URL(string: "https://image.tmdb.org/t/p/w185\(movie.posterURL)") else {
+            return
+        }
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                print("Error loading poster image: \(error.localizedDescription)")
+                return
+            }
+            if let data = data, let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    self.posterImage = image
+                }
+            } else {
+                print("Error loading poster image")
+            }
+        }
+        task.resume()
+    }
+
+}
+
+struct MovieView: View {
+    @State var movie: Movie
+    let userManager: UserManager
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
             Text(movie.title)
-            Text(String(format: "%.1f", movie.imdbScore))
-        }
-        
-    }
-}
-
-struct MovieView : View {
-
-    @State var movie : Movie
-   
-    let userManager : UserManager
-    
-    var body: some View {
-        Text(movie.title)
-        Button(action: {
-            if let user = userManager.user{
-                // (movie.isFavorite).toggle()
-                
-                if (user.checkForFavorite(movie: movie)) {
-                    user.removeMovie(movie: movie)
+                .font(.title)
+            Text(movie.overview)
+                .font(.body)
+            Text("Release Date: \(movie.releaseDate)")
+                .font(.body)
+            HStack {
+                Text("IMDb Score:")
+                    .font(.body)
+                Text(String(format: "%.1f", movie.imdbScore))
+                    .font(.body)
+            }
+            Text("Original Language: \(movie.language)")
+                .font(.body)
+            Text("Genre")
+                .font(.body)
+            Text("Actors")
+                .font(.body)
+          //  Text("Genres: \(movie.genres.joined(separator: ", "))")
+           //     .font(.body)
+          //  Text("Actors: \(movie.actors.joined(separator: ", "))")
+           //     .font(.body)
+          //  Link("Watch Trailer", destination: URL(string: movie.trailerLink)!)
+          //      .font(.body)
+            Button(action: {
+                if let user = userManager.user {
+                    if (user.checkForFavorite(movie: movie)) {
+                        user.removeMovie(movie: movie)
+                    } else {
+                        user.addMovie(movie: movie)
+                    }
+                    userManager.saveUserToFirestore()
                 } else {
-                    user.addMovie(movie: movie)
+                    print("You have to log in to favorite movies")
                 }
-                userManager.saveUserToFirestore()
-            } else {
-                print("You have to log in to favorite movies")
+            }) {
+                if let user = userManager.user {
+                    Image(systemName: user.checkForFavorite(movie: movie) ? "heart.fill" : "heart")
+                } else {
+                    Image(systemName: "heart")
+                }
             }
-        }) {            if let user = userManager.user{
-                Image(systemName: user.checkForFavorite(movie: movie) ? "heart.fill" : "heart")
-            } else {
-                Image(systemName: "heart")
-            }
-        
-            
-            
         }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(10)
+        .shadow(radius: 5)
     }
 }
 

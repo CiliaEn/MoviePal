@@ -13,17 +13,33 @@ class APIManager: ObservableObject {
     let apiKey = "1ab1f7c880d64fe323e8e76edec25435"
     @Published var movies = [Movie]()
     
+    init() {
+            DispatchQueue.main.async {
+                self.loadData()
+            }
+        }
+    
     func loadData(searchWord: String? = nil) {
-        
-        let apiUrl: URL
+        var apiUrl = URL(string: "")
         
         if let searchWord = searchWord {
-             apiUrl = URL(string:"https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&query=\(searchWord)")!
+            if let url = URL(string:"https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&query=\(searchWord)") {
+                apiUrl = url
+            }
+             
         } else {
-             apiUrl = URL(string: "https://api.themoviedb.org/3/movie/popular?api_key=\(apiKey)")!
+            if let url = URL(string: "https://api.themoviedb.org/3/movie/top_rated?api_key=\(apiKey)") {
+                apiUrl = url
+            }
+           
         }
         
-        let task = URLSession.shared.dataTask(with: apiUrl) { data, response, error in
+        guard let url = apiUrl else {
+            print("Error: Invalid URL")
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else {
                 print("Error: No data returned from API.")
                 return
@@ -32,14 +48,15 @@ class APIManager: ObservableObject {
             do {
                 let decoder = JSONDecoder()
                 let result = try decoder.decode(APIResult.self, from: data)
-                self.movies = result.results
                 
-                print("Success decoding movies")
+                DispatchQueue.main.async { // update published property on main thread
+                    self.movies = result.results
+                }
             } catch {
                 print("Error decoding JSON: \(error.localizedDescription)")
             }
         }
-
+        
         task.resume()
     }
 }
@@ -47,4 +64,6 @@ class APIManager: ObservableObject {
 struct APIResult: Codable {
     let page: Int
     let results: [Movie]
+    let total_pages: Int
+    let total_results: Int
 }

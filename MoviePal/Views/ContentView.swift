@@ -41,8 +41,8 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            apiManager.loadData()
-            userManager.getUser()
+           
+        userManager.getUser()
         }
     }
 }

@@ -16,9 +16,7 @@ struct SearchView: View {
     
     var searchResults: [Movie] {
         if searchText.isEmpty {
-          //  apiManager.loadData()
-         //   return apiManager.movies
-            var emptyList = [Movie]()
+            let emptyList = [Movie]()
             return emptyList
         } else {
             apiManager.loadData(searchWord: searchText)
@@ -38,11 +36,13 @@ struct SearchView: View {
                         }
                     )
                 }
+                
             }
         }
         .searchable(text: $searchText)
         .onAppear {
-            apiManager.loadData(searchWord: searchText)
+          //  apiManager.loadData(searchWord: searchText)
+         
    
         }
     }
