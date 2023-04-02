@@ -32,6 +32,7 @@
 		74B8E5E129C8774400E870E4 /* MoviePalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B8E5E029C8774400E870E4 /* MoviePalTests.swift */; };
 		74B8E5EB29C8774400E870E4 /* MoviePalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B8E5EA29C8774400E870E4 /* MoviePalUITests.swift */; };
 		74B8E5ED29C8774400E870E4 /* MoviePalUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B8E5EC29C8774400E870E4 /* MoviePalUITestsLaunchTests.swift */; };
+		74C684AC29D9AED000CD89A9 /* MovieTrailerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C684AB29D9AED000CD89A9 /* MovieTrailerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		74B8E5E629C8774400E870E4 /* MoviePalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoviePalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		74B8E5EA29C8774400E870E4 /* MoviePalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePalUITests.swift; sourceTree = "<group>"; };
 		74B8E5EC29C8774400E870E4 /* MoviePalUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePalUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		74C684AB29D9AED000CD89A9 /* MovieTrailerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTrailerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				748D8BD629C9F6170072832F /* PopularMoviesView.swift */,
 				748D8BD829C9F6330072832F /* SearchView.swift */,
 				748D8BDA29C9F6470072832F /* FavoritesView.swift */,
+				74C684AB29D9AED000CD89A9 /* MovieTrailerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				748D8BC229C888F50072832F /* Movie.swift in Sources */,
 				748D8BDB29C9F6470072832F /* FavoritesView.swift in Sources */,
 				748D8BD929C9F6330072832F /* SearchView.swift in Sources */,
+				74C684AC29D9AED000CD89A9 /* MovieTrailerView.swift in Sources */,
 				74B6D02629CB26EA002FF462 /* LogInView.swift in Sources */,
 				74B6D02A29CB3438002FF462 /* User.swift in Sources */,
 				74B6D02F29CB44FA002FF462 /* UserManager.swift in Sources */,
