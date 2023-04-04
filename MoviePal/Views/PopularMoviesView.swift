@@ -117,12 +117,9 @@ struct MovieView: View {
     @State var movie: Movie
     let userManager: UserManager
     let apiManager: APIManager
-    @State var showTrailer: Bool = false
     
     var body: some View {
-        if showTrailer{
-            MovieTrailerView(movieID: movie.id, apiManager: apiManager)
-        }else{
+    
             
             VStack(alignment: .leading, spacing: 8) {
                 Text(movie.title)
@@ -143,12 +140,6 @@ struct MovieView: View {
                     .font(.body)
                 Text("Actors")
                     .font(.body)
-                //  Text("Genres: \(movie.genres.joined(separator: ", "))")
-                //     .font(.body)
-                //  Text("Actors: \(movie.actors.joined(separator: ", "))")
-                //     .font(.body)
-                //  Link("Watch Trailer", destination: URL(string: movie.trailerLink)!)
-                //      .font(.body)
                 Button(action: {
                     if let user = userManager.user {
                         if (user.checkForFavorite(movie: movie)) {
@@ -168,14 +159,14 @@ struct MovieView: View {
                     }
                 }
                 
-                MovieTrailerView(movieID: movie.id, apiManager: apiManager)
+               MovieTrailerView(movieID: movie.id, apiManager: apiManager)
             }
             .padding()
             .background(Color.white)
             .cornerRadius(10)
             .shadow(radius: 5)
         }
-    }
+    
 }
 
 struct FilterView: View {

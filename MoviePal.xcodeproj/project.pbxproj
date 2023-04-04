@@ -74,6 +74,8 @@
 		74B8E5EA29C8774400E870E4 /* MoviePalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePalUITests.swift; sourceTree = "<group>"; };
 		74B8E5EC29C8774400E870E4 /* MoviePalUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePalUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		74C684AB29D9AED000CD89A9 /* MovieTrailerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTrailerView.swift; sourceTree = "<group>"; };
+		74F3045D29DC602B007A76B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		74F3045F29DC6100007A76B6 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 				74B8E5DF29C8774400E870E4 /* MoviePalTests */,
 				74B8E5E929C8774400E870E4 /* MoviePalUITests */,
 				74B8E5CD29C8773F00E870E4 /* Products */,
+				74F3045E29DC6100007A76B6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -164,6 +167,7 @@
 		74B8E5CE29C8773F00E870E4 /* MoviePal */ = {
 			isa = PBXGroup;
 			children = (
+				74F3045D29DC602B007A76B6 /* Info.plist */,
 				74B8E5CF29C8773F00E870E4 /* MoviePalApp.swift */,
 				74B6D02D29CB38FF002FF462 /* Managers */,
 				74B6D02C29CB38F1002FF462 /* Classes */,
@@ -198,6 +202,14 @@
 				74B8E5EC29C8774400E870E4 /* MoviePalUITestsLaunchTests.swift */,
 			);
 			path = MoviePalUITests;
+			sourceTree = "<group>";
+		};
+		74F3045E29DC6100007A76B6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				74F3045F29DC6100007A76B6 /* WebKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -516,6 +528,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MoviePal/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MoviePal/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -544,6 +558,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MoviePal/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MoviePal/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

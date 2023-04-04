@@ -10,40 +10,47 @@ import SwiftUI
 import WebKit
 
 struct MovieTrailerView: UIViewRepresentable {
-    
+
     let movieID: Int
-    let apiManager : APIManager
-    
+    let apiManager: APIManager
+
     func makeUIView(context: Context) -> WKWebView {
-        return WKWebView(frame: CGRect(x: 0, y: 0, width: 30, height: 25))
+        return WKWebView()
     }
-    
+
     func updateUIView(_ uiView: WKWebView, context: Context) {
-        guard let url = URL(string: "https://www.youtube.com/embed/\(getMovieTrailerURL())") else {
-            return
-        }
-        uiView.load(URLRequest(url: url))
-    }
-    
-    func getMovieTrailerURL() -> String {
-        var urlString = ""
-        let semaphore = DispatchSemaphore(value: 0)
-        let url = URL(string: "https://api.themoviedb.org/3/movie/\(movieID)/videos?api_key=\(apiManager.apiKey)")!
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            defer { semaphore.signal() }
-            if let data = data {
-                do {
-                    let response = try JSONDecoder().decode(MovieTrailerResponse.self, from: data)
-                    if let video = response.results.first {
-                        urlString = video.key
-                    }
-                } catch {
-                    print(error.localizedDescription)
-                }
+        getMovieTrailerURL { urlString in
+            guard let url = URL(string: "https://www.youtube.com/embed/\(urlString)") else {
+                return
             }
-        }.resume()
-        semaphore.wait()
-        return urlString
+            DispatchQueue.main.async {
+                uiView.load(URLRequest(url: url))
+            }
+        }
+    }
+
+    func getMovieTrailerURL(completion: @escaping (String) -> Void) {
+        let url = URL(string: "https://api.themoviedb.org/3/movie/\(movieID)/videos?api_key=\(apiManager.apiKey)")!
+        DispatchQueue.global().async {
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                if let data = data {
+                    do {
+                        let response = try JSONDecoder().decode(MovieTrailerResponse.self, from: data)
+                        if let video = response.results.first {
+                            completion(video.key)
+                        } else {
+                            completion("")
+                        }
+                    } catch {
+                        print(error.localizedDescription)
+                        completion("")
+                    }
+                } else {
+                    print(error?.localizedDescription ?? "Unknown error")
+                    completion("")
+                }
+            }.resume()
+        }
     }
 }
 
