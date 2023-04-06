@@ -158,8 +158,13 @@ struct MovieView: View {
                         Image(systemName: "heart")
                     }
                 }
+                HStack{
+                    VStack{
+                        MovieTrailerView(movieID: movie.id, apiManager: apiManager)
+                    }
+                }
                 
-               MovieTrailerView(movieID: movie.id, apiManager: apiManager)
+               
             }
             .padding()
             .background(Color.white)

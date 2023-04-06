@@ -9,21 +9,27 @@ import Foundation
 import SwiftUI
 import WebKit
 
+import MediaPlayer
+import MediaAccessibility
+
 struct MovieTrailerView: UIViewRepresentable {
 
     let movieID: Int
     let apiManager: APIManager
 
     func makeUIView(context: Context) -> WKWebView {
-        return WKWebView()
+        let webView = WKWebView()
+        webView.configuration.allowsInlineMediaPlayback = true
+        webView.configuration.mediaTypesRequiringUserActionForPlayback = []
+        return webView
     }
 
     func updateUIView(_ uiView: WKWebView, context: Context) {
         getMovieTrailerURL { urlString in
-            guard let url = URL(string: "https://www.youtube.com/embed/\(urlString)") else {
-                return
-            }
-            DispatchQueue.main.async {
+            guard let url = URL(string: "https://www.youtube.com/embed/\(urlString)") else {return}
+            
+            DispatchQueue.main.async{
+                uiView.scrollView.isScrollEnabled = false
                 uiView.load(URLRequest(url: url))
             }
         }

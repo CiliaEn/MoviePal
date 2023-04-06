@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		745B1DB329DDC57D00F89460 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 745B1DB229DDC57D00F89460 /* MediaPlayer.framework */; };
+		745B1DB529DDC58900F89460 /* MediaAccessibility.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 745B1DB429DDC58900F89460 /* MediaAccessibility.framework */; };
+		745B1DB729DDC59300F89460 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 745B1DB629DDC59300F89460 /* CoreMedia.framework */; };
+		745B1DB829DDC6D000F89460 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F3045F29DC6100007A76B6 /* WebKit.framework */; };
 		748D8BC029C886650072832F /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D8BBF29C886650072832F /* APIManager.swift */; };
 		748D8BC229C888F50072832F /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D8BC129C888F50072832F /* Movie.swift */; };
 		748D8BC429C8A33C0072832F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 748D8BC329C8A33C0072832F /* GoogleService-Info.plist */; };
@@ -53,6 +57,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		745B1DB229DDC57D00F89460 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		745B1DB429DDC58900F89460 /* MediaAccessibility.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaAccessibility.framework; path = System/Library/Frameworks/MediaAccessibility.framework; sourceTree = SDKROOT; };
+		745B1DB629DDC59300F89460 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		748D8BBF29C886650072832F /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		748D8BC129C888F50072832F /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		748D8BC329C8A33C0072832F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -83,6 +90,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				745B1DB829DDC6D000F89460 /* WebKit.framework in Frameworks */,
+				745B1DB729DDC59300F89460 /* CoreMedia.framework in Frameworks */,
+				745B1DB529DDC58900F89460 /* MediaAccessibility.framework in Frameworks */,
+				745B1DB329DDC57D00F89460 /* MediaPlayer.framework in Frameworks */,
 				748D8BD329C8A62B0072832F /* FirebaseFunctionsCombine-Community in Frameworks */,
 				748D8BCF29C8A62B0072832F /* FirebaseFirestoreSwift in Frameworks */,
 				748D8BC929C8A62B0072832F /* FirebaseDatabase in Frameworks */,
@@ -207,6 +218,9 @@
 		74F3045E29DC6100007A76B6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				745B1DB629DDC59300F89460 /* CoreMedia.framework */,
+				745B1DB429DDC58900F89460 /* MediaAccessibility.framework */,
+				745B1DB229DDC57D00F89460 /* MediaPlayer.framework */,
 				74F3045F29DC6100007A76B6 /* WebKit.framework */,
 			);
 			name = Frameworks;
