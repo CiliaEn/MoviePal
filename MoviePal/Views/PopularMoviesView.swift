@@ -36,7 +36,7 @@ struct PopularMoviesView: View {
                         ForEach(sortedMovies) { movie in
 
                         NavigationLink(
-                            destination: MovieView(movie: movie, userManager: userManager),
+                            destination: MovieView(movie: movie, userManager: userManager, apiManager: apiManager),
                             label: {
                                 ListView(movie: movie)
                             }
@@ -113,59 +113,65 @@ struct ListView: View {
 }
 
 struct MovieView: View {
+    
     @State var movie: Movie
     let userManager: UserManager
+    let apiManager: APIManager
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(movie.title)
-                .font(.title)
-            Text(movie.overview)
-                .font(.body)
-            Text("Release Date: \(movie.releaseDate)")
-                .font(.body)
-            HStack {
-                Text("IMDb Score:")
+    
+            
+            VStack(alignment: .leading, spacing: 8) {
+                Text(movie.title)
+                    .font(.title)
+                Text(movie.overview)
                     .font(.body)
-                Text(String(format: "%.1f", movie.imdbScore))
+                Text("Release Date: \(movie.releaseDate)")
                     .font(.body)
-            }
-            Text("Original Language: \(movie.language)")
-                .font(.body)
-            Text("Genre")
-                .font(.body)
-            Text("Actors")
-                .font(.body)
-          //  Text("Genres: \(movie.genres.joined(separator: ", "))")
-           //     .font(.body)
-          //  Text("Actors: \(movie.actors.joined(separator: ", "))")
-           //     .font(.body)
-          //  Link("Watch Trailer", destination: URL(string: movie.trailerLink)!)
-          //      .font(.body)
-            Button(action: {
-                if let user = userManager.user {
-                    if (user.checkForFavorite(movie: movie)) {
-                        user.removeMovie(movie: movie)
+                HStack {
+                    Text("IMDb Score:")
+                        .font(.body)
+                    Text(String(format: "%.1f", movie.imdbScore))
+                        .font(.body)
+                }
+                Text("Original Language: \(movie.language)")
+                    .font(.body)
+                Text("Genre")
+                    .font(.body)
+                Text("Actors")
+                    .font(.body)
+                Button(action: {
+                    if let user = userManager.user {
+                        if (user.checkForFavorite(movie: movie)) {
+                            user.removeMovie(movie: movie)
+                        } else {
+                            user.addMovie(movie: movie)
+                        }
+                        userManager.saveUserToFirestore()
                     } else {
-                        user.addMovie(movie: movie)
+                        print("You have to log in to favorite movies")
                     }
-                    userManager.saveUserToFirestore()
-                } else {
-                    print("You have to log in to favorite movies")
+                }) {
+                    if let user = userManager.user {
+                        Image(systemName: user.checkForFavorite(movie: movie) ? "heart.fill" : "heart")
+                    } else {
+                        Image(systemName: "heart")
+                    }
                 }
-            }) {
-                if let user = userManager.user {
-                    Image(systemName: user.checkForFavorite(movie: movie) ? "heart.fill" : "heart")
-                } else {
-                    Image(systemName: "heart")
+                HStack{
+                    VStack{
+                        MovieTrailerView(movieID: movie.id, apiManager: apiManager)
+                    }
                 }
+                
+               
             }
+            .padding()
+            .background(Color.white)
+            .cornerRadius(10)
+            .shadow(radius: 5)
         }
-        .padding()
-        .background(Color.white)
-        .cornerRadius(10)
-        .shadow(radius: 5)
-    }
+    
 }
 
 struct FilterView: View {
