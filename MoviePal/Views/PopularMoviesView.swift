@@ -45,13 +45,9 @@ struct PopularMoviesView: View {
                     }
                 }
             }
-        
         .onAppear {
-            
             userManager.getUser()
-            
         }
-  
     }
 }
 
@@ -74,7 +70,6 @@ struct ListView: View {
                     .frame(width: 80, height: 120)
                     .cornerRadius(10)
             }
-            
             VStack(alignment: .leading, spacing: 8) {
                 Text(movie.title)
                     .font(.system(size: 12, weight: .regular))
@@ -109,7 +104,6 @@ struct ListView: View {
         }
         task.resume()
     }
-
 }
 
 struct MovieView: View {
@@ -118,59 +112,70 @@ struct MovieView: View {
     let userManager: UserManager
     let apiManager: APIManager
     
-    var body: some View {
+    @State private var showAllActors = false
     
-            
-            VStack(alignment: .leading, spacing: 8) {
-                Text(movie.title)
-                    .font(.title)
-                Text(movie.overview)
-                    .font(.body)
-                Text("Release Date: \(movie.releaseDate)")
-                    .font(.body)
-                HStack {
-                    Text("IMDb Score:")
-                        .font(.body)
-                    Text(String(format: "%.1f", movie.imdbScore))
-                        .font(.body)
+    var body: some View {
+        
+        VStack(alignment: .leading, spacing: 8) {
+            HStack{
+                VStack{
+                    MovieTrailerView(movieID: movie.id, apiManager: apiManager)
                 }
-                Text("Original Language: \(movie.language)")
+            }
+            Text(movie.title)
+                .font(.title)
+            Text(movie.overview)
+                .font(.body)
+            Text("Release Date: \(movie.releaseDate)")
+                .font(.body)
+            HStack {
+                Text("IMDb Score:")
                     .font(.body)
-                Text("Genre")
+                Text(String(format: "%.1f", movie.imdbScore))
                     .font(.body)
-                Text("Actors")
-                    .font(.body)
-                Button(action: {
-                    if let user = userManager.user {
-                        if (user.checkForFavorite(movie: movie)) {
-                            user.removeMovie(movie: movie)
-                        } else {
-                            user.addMovie(movie: movie)
-                        }
-                        userManager.saveUserToFirestore()
+            }
+            Text("Genre")
+                .font(.body)
+            Text("Actors: " + (showAllActors ? movie.actors.joined(separator: ", ") : movie.actors.prefix(6).joined(separator: ", ")))
+                .font(.body)
+                .lineLimit(nil)
+                .onTapGesture {
+                    self.showAllActors.toggle()
+                }
+            
+            Button(action: {
+                if let user = userManager.user {
+                    if (user.checkForFavorite(movie: movie)) {
+                        print("removeMovie")
+                        user.removeMovie(movie: movie)
                     } else {
-                        print("You have to log in to favorite movies")
+                        print("addMovie")
+                        user.addMovie(movie: movie)
                     }
-                }) {
-                    if let user = userManager.user {
-                        Image(systemName: user.checkForFavorite(movie: movie) ? "heart.fill" : "heart")
+                    userManager.saveUserToFirestore()
+                } else {
+                    print("You have to log in to favorite movies")
+                }
+            }) {
+                if let user = userManager.user {
+                    if user.checkForFavorite(movie: movie) {
+                        Image(systemName: "heart.fill")
                     } else {
                         Image(systemName: "heart")
                     }
+                } else {
+                    Image(systemName: "heart")
                 }
-                HStack{
-                    VStack{
-                        MovieTrailerView(movieID: movie.id, apiManager: apiManager)
-                    }
-                }
-                
-               
             }
-            .padding()
-            .background(Color.white)
-            .cornerRadius(10)
-            .shadow(radius: 5)
         }
+        .onAppear {
+            userManager.getUser()
+        }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(10)
+        .shadow(radius: 5)
+    }
     
 }
 

@@ -15,7 +15,8 @@ struct Movie: Codable, Identifiable, Hashable {
     let releaseDate: String
     let imdbScore: Double
     let language: String
-    
+    var actors: [String] = []
+
     enum CodingKeys: String, CodingKey {
         case id, title, overview
         case posterURL = "poster_path"

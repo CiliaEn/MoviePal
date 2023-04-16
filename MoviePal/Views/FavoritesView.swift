@@ -12,14 +12,29 @@ struct FavoritesView: View {
     let apiManager : APIManager
     let userManager : UserManager
     
+    let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+    
     var body: some View {
         if let user = userManager.user {
             VStack {
-                List {
-                    ForEach (user.favoriteMovies) { movie in
-                        ListView(movie: movie)
-                    }
+                
+                Text("My liked movies")
+                    .font(.system(size: 22, weight: .regular))
+                    
+                    ScrollView{
+                        LazyVGrid(columns: columns) {
+                            ForEach (user.favoriteMovies) { movie in
+                                
+                                NavigationLink(
+                                    destination: MovieView(movie: movie, userManager: userManager, apiManager: apiManager),
+                                    label: {
+                                        ListView(movie: movie)
+                                    }
+                                )
+                            }
+                        }
                 }
+                
             }
            
             

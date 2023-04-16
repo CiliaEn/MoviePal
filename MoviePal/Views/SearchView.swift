@@ -19,7 +19,7 @@ struct SearchView: View {
             let emptyList = [Movie]()
             return emptyList
         } else {
-            apiManager.loadData(searchWord: searchText)
+            apiManager.loadMovies(searchWord: searchText)
             return apiManager.movies
         }
     }

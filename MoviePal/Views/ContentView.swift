@@ -11,38 +11,36 @@ import FirebaseCore
 import FirebaseAuth
 
 struct ContentView: View {
-    
-    @ObservedObject var userManager : UserManager
+    @ObservedObject var userManager: UserManager
     @ObservedObject var apiManager = APIManager()
     
     var body: some View {
-        VStack{
-            
+        VStack {
             TabView {
-                NavigationView {
-                    PopularMoviesView( apiManager: apiManager, userManager: userManager)
+                NavigationStack {
+                    PopularMoviesView(apiManager: apiManager, userManager: userManager)
                 }
                 .tabItem {
-                    Label("First", systemImage: "1.circle")
+                    Label("Home", systemImage: "house")
                 }
                 
-                NavigationView {
+                NavigationStack {
                     SearchView(apiManager: apiManager, userManager: userManager)
                 }
                 .tabItem {
-                    Label("Second", systemImage: "2.circle")
+                    Label("Search", systemImage: "magnifyingglass")
                 }
-                NavigationView {
+                
+                NavigationStack {
                     FavoritesView(apiManager: apiManager, userManager: userManager)
                 }
                 .tabItem {
-                    Label("Third", systemImage: "3.circle")
+                    Label("Favorites", systemImage: "heart")
                 }
             }
         }
         .onAppear {
-           
-        userManager.getUser()
+            userManager.getUser()
         }
     }
 }
