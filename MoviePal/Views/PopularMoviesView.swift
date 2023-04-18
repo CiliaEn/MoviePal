@@ -45,9 +45,7 @@ struct PopularMoviesView: View {
                     }
                 }
             }
-        .onAppear {
-            userManager.getUser()
-        }
+        
     }
 }
 
@@ -117,11 +115,11 @@ struct MovieView: View {
     var body: some View {
         
         VStack(alignment: .leading, spacing: 8) {
-            HStack{
-                VStack{
-                    MovieTrailerView(movieID: movie.id, apiManager: apiManager)
-                }
-            }
+//            HStack{
+//                VStack{
+//                    MovieTrailerView(movieID: movie.id, apiManager: apiManager)
+//                }
+//            }
             Text(movie.title)
                 .font(.title)
             Text(movie.overview)
@@ -167,9 +165,6 @@ struct MovieView: View {
                     Image(systemName: "heart")
                 }
             }
-        }
-        .onAppear {
-            userManager.getUser()
         }
         .padding()
         .background(Color.white)
