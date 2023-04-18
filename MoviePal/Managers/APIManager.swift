@@ -65,9 +65,7 @@ class APIManager: ObservableObject {
                         }
                     }
                     
-                    group.notify(queue: DispatchQueue.main) {
-                        print("Finished loading movies with actors.")
-                    }
+                    
                 }
             } catch {
                 print("Error decoding JSON: \(error.localizedDescription)")

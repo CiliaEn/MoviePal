@@ -18,11 +18,11 @@ struct MovieInfoView: View {
     var body: some View {
         
         VStack(alignment: .leading, spacing: 8) {
-//            HStack{
-//                VStack{
-//                    MovieTrailerView(movieID: movie.id, apiManager: apiManager)
-//                }
-//            }
+            HStack{
+                VStack{
+                    MovieTrailerView(movieID: movie.id, apiManager: apiManager)
+                }
+            }
             Text(movie.title)
                 .font(.title)
             Text(movie.overview)
@@ -37,7 +37,7 @@ struct MovieInfoView: View {
             }
             Text("Genre")
                 .font(.body)
-            Text("Actors: " + (showAllActors ? movie.actors.joined(separator: ", ") : movie.actors.prefix(6).joined(separator: ", ")))
+            Text("Actors: " + (showAllActors ? movie.actors.joined(separator: ", ") : movie.actors.prefix(6).joined(separator: ", ")) + "...")
                 .font(.body)
                 .lineLimit(nil)
                 .onTapGesture {

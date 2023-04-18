@@ -133,8 +133,8 @@
 				748D8BD629C9F6170072832F /* PopularMoviesView.swift */,
 				748D8BD829C9F6330072832F /* SearchView.swift */,
 				748D8BDA29C9F6470072832F /* FavoritesView.swift */,
-				74C684AB29D9AED000CD89A9 /* MovieTrailerView.swift */,
 				74D7F10C29EEF3AA0031426A /* MovieInfoView.swift */,
+				74C684AB29D9AED000CD89A9 /* MovieTrailerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
