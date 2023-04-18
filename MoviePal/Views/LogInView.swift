@@ -14,11 +14,10 @@ struct LogInView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var isLoggingIn = true
-    @State private var loggedIn = false
     @ObservedObject var userManager : UserManager
     
     var body: some View {
-        if loggedIn {
+        if userManager.user != nil {
             ContentView(userManager: userManager)
                 
         } else{
@@ -71,8 +70,9 @@ struct LogInView: View {
                 print("Error logging in \(error)")
             } else {
                 // Login successful
+                userManager.getUser()
                 print("Logging in...")
-                loggedIn = true
+               
                 
             }
         }
@@ -81,7 +81,6 @@ struct LogInView: View {
     
     func signup() {
         
-      
             Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
                 if let error = error {
                     print("Error signing up \(error)")
@@ -98,7 +97,6 @@ struct LogInView: View {
                             print("Error saving  \(error)")
                         } else {
                             userManager.user = newUser
-                            loggedIn = true
                             print("Signing up...")
                         }
                     }
