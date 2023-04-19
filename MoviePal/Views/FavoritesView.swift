@@ -26,7 +26,7 @@ struct FavoritesView: View {
                             ForEach (user.favoriteMovies) { movie in
                                 
                                 NavigationLink(
-                                    destination: MovieView(movie: movie, userManager: userManager, apiManager: apiManager),
+                                    destination: MovieInfoView(movie: movie, userManager: userManager, apiManager: apiManager),
                                     label: {
                                         ListView(movie: movie)
                                     }
@@ -34,10 +34,19 @@ struct FavoritesView: View {
                             }
                         }
                 }
-                
+                Button(action: {
+                    userManager.signOut()
+                }) {
+                    Text("Sign out")
+                }
+            }
+            .onAppear {
+                userManager.getUser()
             }
            
             
+        } else {
+            LogInView(userManager: userManager)
         }
     }
 }

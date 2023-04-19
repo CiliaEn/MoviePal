@@ -30,7 +30,7 @@ struct SearchView: View {
             List {
                 ForEach(searchResults, id: \.self) { movie in
                     NavigationLink(
-                        destination: MovieView(movie: movie, userManager: userManager, apiManager: apiManager),
+                        destination: MovieInfoView(movie: movie, userManager: userManager, apiManager: apiManager),
                         label: {
                             ListView(movie: movie)
                         }

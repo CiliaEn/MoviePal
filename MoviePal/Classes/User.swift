@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import Combine
 
-class User : Codable, ObservableObject {
+class User: ObservableObject, Codable {
     
-    var email : String
-    var favoriteMovies = [Movie]()
+    var email: String
+    var favoriteMovies: [Movie]
     
     init(email: String, favoriteMovies: [Movie] = []) {
         self.email = email
@@ -18,25 +19,23 @@ class User : Codable, ObservableObject {
     }
     
     func addMovie(movie: Movie) {
-        
         if (!favoriteMovies.contains(movie)) {
             self.favoriteMovies.append(movie)
             print("movie added to favorites")
         }
     }
+    
     func removeMovie(movie: Movie) {
-        
-        if let index = favoriteMovies.firstIndex(of: movie) {
-            favoriteMovies.remove(at: index)
+        favoriteMovies = favoriteMovies.filter { $0.id != movie.id }
             print("movie removed from favorites")
-        }
     }
+    
     func checkForFavorite(movie: Movie) -> Bool {
-        
-        if (favoriteMovies.contains(movie)) {
-            return true
-        } else {
-            return false
+        for favoriteMovie in favoriteMovies {
+            if favoriteMovie.id == movie.id {
+                return true
+            }
         }
+        return false
     }
 }
