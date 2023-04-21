@@ -22,9 +22,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct MoviePalApp: App {
   
   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-
-  
-
+    
   var body: some Scene {
     WindowGroup {
       NavigationView {

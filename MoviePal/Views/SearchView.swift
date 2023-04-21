@@ -25,26 +25,24 @@ struct SearchView: View {
     }
     
     var body: some View {
-        VStack {
-            
-            List {
-                ForEach(searchResults, id: \.self) { movie in
-                    NavigationLink(
-                        destination: MovieInfoView(movie: movie, userManager: userManager, apiManager: apiManager),
-                        label: {
-                            ListView(movie: movie)
-                        }
-                    )
-                }
+       
+            VStack {
                 
+                List {
+                    ForEach(searchResults, id: \.self) { movie in
+                        NavigationLink(
+                            destination: MovieInfoView(movie: movie, userManager: userManager, apiManager: apiManager),
+                            label: {
+                                SearchItemView(movie: movie)
+                            }
+                        )
+                    }
+                    
+                }
             }
-        }
-        .searchable(text: $searchText)
-        .onAppear {
-          //  apiManager.loadData(searchWord: searchText)
-         
-   
-        }
+            .searchable(text: $searchText)
+            
+        
     }
   
 }

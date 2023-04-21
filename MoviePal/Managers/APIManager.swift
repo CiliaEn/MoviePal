@@ -124,6 +124,27 @@ class APIManager: ObservableObject {
     }
 }
 
+func loadPoster(movie: Movie, completion: @escaping (UIImage?) -> Void) {
+    guard let url = URL(string: "https://image.tmdb.org/t/p/w185\(movie.posterURL)") else {
+        completion(nil)
+        return
+    }
+    let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        if let error = error {
+            print("Error loading poster image: \(error.localizedDescription)")
+            completion(nil)
+            return
+        }
+        if let data = data, let image = UIImage(data: data) {
+            completion(image)
+        } else {
+            print("Error loading poster image")
+            completion(nil)
+        }
+    }
+    task.resume()
+}
+
 
 
 struct CreditsResponse: Codable {

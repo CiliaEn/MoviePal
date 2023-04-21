@@ -17,51 +17,53 @@ struct LogInView: View {
     @ObservedObject var userManager : UserManager
     
     var body: some View {
-        if userManager.user != nil {
-            ContentView(userManager: userManager)
+        
+            if userManager.user != nil {
+                ContentView(userManager: userManager)
                 
-        } else{
-            VStack {
-                Image(systemName: "lock.shield")
-                    .font(.largeTitle)
-                    .padding(.bottom, 40)
-                TextField("Email", text: $email)
-                    .padding()
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(5.0)
-                    .padding(.bottom, 20)
-                SecureField("Password", text: $password)
-                    .padding()
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(5.0)
-                    .padding(.bottom, 20)
-                Button(action: {
-                    if isLoggingIn {
-                        login()
-                    } else {
-                        signup()
-                    }
-                }) {
-                    Text(isLoggingIn ? "Login" : "Signup")
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
+            } else{
+                VStack {
+                    Image(systemName: "lock.shield")
+                        .font(.largeTitle)
+                        .padding(.bottom, 40)
+                    TextField("Email", text: $email)
                         .padding()
-                        .background(Color.blue)
+                        .background(Color.gray.opacity(0.2))
                         .cornerRadius(5.0)
+                        .padding(.bottom, 20)
+                    SecureField("Password", text: $password)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(5.0)
+                        .padding(.bottom, 20)
+                    Button(action: {
+                        if isLoggingIn {
+                            login()
+                        } else {
+                            signup()
+                        }
+                    }) {
+                        Text(isLoggingIn ? "Login" : "Signup")
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.blue)
+                            .cornerRadius(5.0)
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 10)
+                    Button(action: {
+                        isLoggingIn.toggle()
+                    }) {
+                        Text(isLoggingIn ? "Don't have an account? Signup" : "Already have an account? Login")
+                            .foregroundColor(.blue)
+                    }
+                    .padding(.bottom, 30)
                 }
-                .padding(.horizontal, 20)
-                .padding(.bottom, 10)
-                Button(action: {
-                    isLoggingIn.toggle()
-                }) {
-                    Text(isLoggingIn ? "Don't have an account? Signup" : "Already have an account? Login")
-                        .foregroundColor(.blue)
-                }
-                .padding(.bottom, 30)
+                .padding()
             }
-            .padding()
         }
-    }
+    
     
     func login() {
         

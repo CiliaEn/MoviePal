@@ -15,9 +15,13 @@ struct ContentView: View {
     @ObservedObject var apiManager = APIManager()
     
     var body: some View {
-        VStack {
+        
+       
+        VStack{
             TabView {
+                
                 NavigationStack {
+                    Text("MoviePal")
                     PopularMoviesView(apiManager: apiManager, userManager: userManager)
                 }
                 .tabItem {
@@ -38,11 +42,13 @@ struct ContentView: View {
                     Label("Favorites", systemImage: "heart")
                 }
             }
+            
         }
-        .onAppear {
-            userManager.getUser()
+            .onAppear {
+                userManager.getUser()
+            }
+            
         }
-    }
 }
 
 

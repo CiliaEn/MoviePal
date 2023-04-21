@@ -15,11 +15,12 @@ struct FavoritesView: View {
     let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
-        if let user = userManager.user {
-            VStack {
-                
-                Text("My liked movies")
-                    .font(.system(size: 22, weight: .regular))
+       
+            if let user = userManager.user {
+                VStack {
+                    
+                    Text("My liked movies")
+                        .font(.system(size: 22, weight: .regular))
                     
                     ScrollView{
                         LazyVGrid(columns: columns) {
@@ -28,25 +29,25 @@ struct FavoritesView: View {
                                 NavigationLink(
                                     destination: MovieInfoView(movie: movie, userManager: userManager, apiManager: apiManager),
                                     label: {
-                                        ListView(movie: movie)
+                                        GridItemView(movie: movie)
                                     }
                                 )
                             }
                         }
+                    }
+                    Button(action: {
+                        userManager.signOut()
+                    }) {
+                        Text("Sign out")
+                    }
+                    Spacer()
                 }
-                Button(action: {
-                    userManager.signOut()
-                }) {
-                    Text("Sign out")
+                .onAppear {
+                    userManager.getUser()
                 }
+            } else {
+                LogInView(userManager: userManager)
             }
-            .onAppear {
-                userManager.getUser()
-            }
-           
-            
-        } else {
-            LogInView(userManager: userManager)
-        }
+      
     }
 }
