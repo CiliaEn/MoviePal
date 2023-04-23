@@ -25,7 +25,11 @@ struct SearchView: View {
     }
     
     var body: some View {
-       
+        
+        ZStack{
+            Color(red: 20/255, green: 20/255, blue: 20/255)
+                .ignoresSafeArea()
+            
             VStack {
                 
                 List {
@@ -42,7 +46,8 @@ struct SearchView: View {
             }
             .searchable(text: $searchText)
             
-        
+            
+        }
     }
   
 }

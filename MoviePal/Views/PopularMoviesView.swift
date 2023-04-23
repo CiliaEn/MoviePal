@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct PopularMoviesView: View {
 
@@ -27,9 +28,16 @@ struct PopularMoviesView: View {
     }
     
     var body: some View {
-       
+        ZStack{
+            Color(red: 20/255, green: 20/255, blue: 20/255)
+                .ignoresSafeArea()
+            
             VStack{
                 HStack{
+                    Text("Popular Movies")
+                        .foregroundColor(.white)
+                        .font(.system(size: 24, weight: .bold))
+                        .padding()
                     Spacer()
                     FilterView(selectedOption: $selectedSortingOption)
                 }
@@ -48,8 +56,8 @@ struct PopularMoviesView: View {
                     }
                 }
             }
-        
-        
+            
+        }
     }
 }
 
@@ -64,13 +72,22 @@ struct FilterView: View {
     var body: some View {
         HStack {
             Text("Sort by:")
+                .foregroundColor(.white)
             Picker(selection: $selectedOption, label: Text("")) {
                 ForEach(sortingOptions, id: \.self) { option in
                     Text(option)
+                        .foregroundColor(.white)
                 }
             }
             .pickerStyle(MenuPickerStyle())
         }
-        .padding(.horizontal)
+      
+    }
+}
+
+struct ContentPreview: PreviewProvider {
+    static var previews: some View {
+        PopularMoviesView(apiManager: APIManager(), userManager: UserManager())
+
     }
 }

@@ -11,45 +11,51 @@ import FirebaseCore
 import FirebaseAuth
 
 struct ContentView: View {
-    @ObservedObject var userManager: UserManager
+    @ObservedObject var userManager : UserManager
     @ObservedObject var apiManager = APIManager()
     
     var body: some View {
         
-       
-        VStack{
-            TabView {
+            VStack{
+                TabView {
+                    
+                    NavigationStack {
+                        PopularMoviesView(apiManager: apiManager, userManager: userManager)
+                    }
+                    .tabItem {
+                        Label("Home", systemImage: "house")
+                    }
+                    
+                    NavigationStack {
+                        SearchView(apiManager: apiManager, userManager: userManager)
+                    }
+                    .tabItem {
+                        Label("Search", systemImage: "magnifyingglass")
+                    }
+                    
+                    NavigationStack {
+                        FavoritesView(apiManager: apiManager, userManager: userManager)
+                    }
+                    .tabItem {
+                        Label("Favorites", systemImage: "heart")
+                    }
+                }
                 
-                NavigationStack {
-                    Text("MoviePal")
-                    PopularMoviesView(apiManager: apiManager, userManager: userManager)
-                }
-                .tabItem {
-                    Label("Home", systemImage: "house")
-                }
-                
-                NavigationStack {
-                    SearchView(apiManager: apiManager, userManager: userManager)
-                }
-                .tabItem {
-                    Label("Search", systemImage: "magnifyingglass")
-                }
-                
-                NavigationStack {
-                    FavoritesView(apiManager: apiManager, userManager: userManager)
-                }
-                .tabItem {
-                    Label("Favorites", systemImage: "heart")
-                }
             }
             
-        }
             .onAppear {
                 userManager.getUser()
-            }
             
         }
+        }
 }
+
+//struct ContentPreview: PreviewProvider {
+//    static var previews: some View {
+//        ContentView()
+//          
+//    }
+//}
 
 
 

@@ -12,10 +12,12 @@ class APIManager: ObservableObject {
     
     let apiKey = "1ab1f7c880d64fe323e8e76edec25435"
     @Published var movies = [Movie]()
+    @Published var genres = [Genre]()
     
     init() {
             DispatchQueue.main.async {
                 self.loadMovies()
+                self.getGenres()
             }
         }
     
@@ -63,8 +65,19 @@ class APIManager: ObservableObject {
                             }
                             group.leave()
                         }
+                        
+                        var genres: [String] = []
+                        
+                        group.notify(queue: .main) {
+                            
+                            for id in movie.genreIds {
+                                if let genre = self.genres.first(where: { $0.id == id }) {
+                                    genres.append(genre.name)
+                                }
+                            }
+                            self.movies[i].genres = genres
+                        }
                     }
-                    
                     
                 }
             } catch {
@@ -75,11 +88,40 @@ class APIManager: ObservableObject {
         task.resume()
     }
     
-    struct APIResult: Codable {
-        let page: Int
-        let results: [Movie]
-        let total_pages: Int
-        let total_results: Int
+    func getGenres() {
+        let urlString = "https://api.themoviedb.org/3/genre/movie/list?api_key=\(apiKey)"
+        
+        guard let url = URL(string: urlString) else {
+            print("Invalid URL")
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            guard let data = data else {
+                print("No data received")
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let genresResponse = try decoder.decode(GenresResponse.self, from: data)
+                
+                DispatchQueue.main.async{
+                    
+                    self.genres = genresResponse.genres.map { Genre(id: $0.id, name: $0.name) }
+                }
+            } catch let error {
+                print(error.localizedDescription)
+            }
+        }
+        
+        task.resume()
     }
     
     func getActors(movie: Movie, completion: @escaping ([String]?) -> Void) {
@@ -156,4 +198,20 @@ struct Cast: Codable {
     let id: Int
     let name: String
     let character: String
+}
+
+struct APIResult: Codable {
+    let page: Int
+    let results: [Movie]
+    let total_pages: Int
+    let total_results: Int
+}
+
+struct GenresResponse: Codable {
+    let genres: [Genre]
+}
+
+struct Genre: Codable {
+    let id: Int
+    let name: String
 }

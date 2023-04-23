@@ -20,6 +20,7 @@ struct SplashScreenView: View {
                 
                 if loaded {
                     ContentView(userManager: userManager)
+                        
                     
                 } else{
                     VStack{

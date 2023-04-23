@@ -17,27 +17,34 @@ struct MovieInfoView: View {
     
     var body: some View {
         
-        
+        ZStack{
+            Color(red: 20/255, green: 20/255, blue: 20/255)
+                .ignoresSafeArea()
             
             
             VStack (alignment: .leading, spacing: 8){
                 MovieTrailerView(movieID: movie.id, apiManager: apiManager)
                 
-                
                 Text(movie.title)
                     .font(.title)
+                    .foregroundColor(.white)
                 Text(movie.overview)
                     .font(.body)
+                    .foregroundColor(.white)
                 Text("Release Date: \(movie.releaseDate)")
                     .font(.body)
+                    .foregroundColor(.white)
                 HStack {
                     Text("IMDb Score:")
                         .font(.body)
+                        .foregroundColor(.white)
                     Text(String(format: "%.1f", movie.imdbScore))
                         .font(.body)
+                        .foregroundColor(.white)
                 }
-                Text("Genre")
+                Text("Genre: " + movie.genres.joined(separator: ", "))
                     .font(.body)
+                    .foregroundColor(.white)
                 Text("Actors: " + (showAllActors ? movie.actors.joined(separator: ", ") : movie.actors.prefix(6).joined(separator: ", ")) + "...")
                     .font(.body)
                     .lineLimit(nil)
@@ -74,5 +81,8 @@ struct MovieInfoView: View {
             .cornerRadius(10)
             .shadow(radius: 5)
         }
+    }
     
 }
+
+

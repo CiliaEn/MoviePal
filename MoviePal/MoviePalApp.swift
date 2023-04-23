@@ -27,6 +27,7 @@ struct MoviePalApp: App {
     WindowGroup {
       NavigationView {
         SplashScreenView()
+          
       }
     }
   }
