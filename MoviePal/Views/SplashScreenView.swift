@@ -16,13 +16,17 @@ struct SplashScreenView: View {
     
     var body: some View {
             
-            VStack {
+        VStack {
+            
+            if loaded {
+                ContentView(userManager: userManager)
                 
-                if loaded {
-                    ContentView(userManager: userManager)
-                        
+                
+            } else{
+                ZStack{
                     
-                } else{
+                    Color(red: 20/255, green: 20/255, blue: 20/255)
+                        .ignoresSafeArea()
                     VStack{
                         VStack{
                             Image(systemName: "camera.macro")
@@ -50,10 +54,11 @@ struct SplashScreenView: View {
                     }
                 }
             }
-            .onAppear {
-                userManager.getUser()
-            }
-       
+        }
+                .onAppear {
+                    userManager.getUser()
+                }
+        
     }
 }
 

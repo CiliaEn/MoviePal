@@ -14,7 +14,10 @@ struct SearchItemView: View {
     @State private var posterImage: UIImage?
     
     var body: some View {
-       
+        ZStack{
+            
+            Color(red: 20/255, green: 20/255, blue: 20/255)
+            
             HStack {
                 if let image = posterImage {
                     Image(uiImage: image)
@@ -39,12 +42,13 @@ struct SearchItemView: View {
             }
             .onAppear {
                 loadPoster(movie: movie) { image in
-                            if let image = image {
-                                self.posterImage = image
-                            }
-                        }
+                    if let image = image {
+                        self.posterImage = image
+                    }
+                }
             }
-        
+            
+        }
     }
 }
 

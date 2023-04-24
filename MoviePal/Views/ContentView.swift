@@ -11,10 +11,14 @@ import FirebaseCore
 import FirebaseAuth
 
 struct ContentView: View {
+    
     @ObservedObject var userManager : UserManager
     @ObservedObject var apiManager = APIManager()
     
+    
     var body: some View {
+        
+       
         
             VStack{
                 TabView {
@@ -40,11 +44,14 @@ struct ContentView: View {
                         Label("Favorites", systemImage: "heart")
                     }
                 }
+                .accentColor(Color.mint.opacity(0.7))
                 
             }
             
             .onAppear {
                 userManager.getUser()
+                UITabBar.appearance().barTintColor = .black
+                UITabBar.appearance().unselectedItemTintColor = .white
             
         }
         }

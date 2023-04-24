@@ -48,6 +48,7 @@ struct MovieInfoView: View {
                 Text("Actors: " + (showAllActors ? movie.actors.joined(separator: ", ") : movie.actors.prefix(6).joined(separator: ", ")) + "...")
                     .font(.body)
                     .lineLimit(nil)
+                    .foregroundColor(.white)
                     .onTapGesture {
                         self.showAllActors.toggle()
                     }

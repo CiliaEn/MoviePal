@@ -29,16 +29,19 @@ struct LogInView: View {
                         Image(systemName: "lock.shield")
                             .font(.largeTitle)
                             .padding(.bottom, 40)
+                            .foregroundColor(Color.mint.opacity(0.8))
                         TextField("Email", text: $email)
                             .padding()
-                            .background(Color.gray.opacity(0.2))
+                            .background(Color.white.opacity(0.75))
                             .cornerRadius(5.0)
                             .padding(.bottom, 20)
+                            .padding(.horizontal, 20)
                         SecureField("Password", text: $password)
                             .padding()
-                            .background(Color.gray.opacity(0.2))
+                            .background(Color.white.opacity(0.75))
                             .cornerRadius(5.0)
                             .padding(.bottom, 20)
+                            .padding(.horizontal, 20)
                         Button(action: {
                             if isLoggingIn {
                                 login()
@@ -50,16 +53,16 @@ struct LogInView: View {
                                 .foregroundColor(.white)
                                 .frame(maxWidth: .infinity)
                                 .padding()
-                                .background(Color.blue)
+                                .background(Color.mint.opacity(0.7))
                                 .cornerRadius(5.0)
                         }
-                        .padding(.horizontal, 20)
-                        .padding(.bottom, 10)
+                        .padding(.horizontal, 40)
+                        .padding(.bottom, 5)
                         Button(action: {
                             isLoggingIn.toggle()
                         }) {
                             Text(isLoggingIn ? "Don't have an account? Signup" : "Already have an account? Login")
-                                .foregroundColor(.blue)
+                                .foregroundColor(.white)
                         }
                         .padding(.bottom, 30)
                     }

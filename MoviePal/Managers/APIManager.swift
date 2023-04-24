@@ -11,17 +11,22 @@ import SwiftUI
 class APIManager: ObservableObject {
     
     let apiKey = "1ab1f7c880d64fe323e8e76edec25435"
-    @Published var movies = [Movie]()
+    @Published var popularMovies = [Movie]()
+    @Published var topRatedMovies = [Movie]()
+    @Published var nowPlayingMovies = [Movie]()
+    @Published var searchResults = [Movie]()
     @Published var genres = [Genre]()
     
     init() {
             DispatchQueue.main.async {
-                self.loadMovies()
+                self.loadMovies(type: "popular")
+                self.loadMovies(type: "top_rated")
+                self.loadMovies(type: "now_playing")
                 self.getGenres()
             }
         }
     
-    func loadMovies(searchWord: String? = nil) {
+    func loadMovies(searchWord: String? = nil, type: String) {
         var apiUrl = URL(string: "")
         
         if let searchWord = searchWord {
@@ -30,7 +35,7 @@ class APIManager: ObservableObject {
             }
              
         } else {
-            if let url = URL(string: "https://api.themoviedb.org/3/movie/popular?api_key=\(apiKey)") {
+            if let url = URL(string: "https://api.themoviedb.org/3/movie/\(type)?api_key=\(apiKey)") {
                 apiUrl = url
             }
         }
@@ -39,6 +44,7 @@ class APIManager: ObservableObject {
             print("Error: Invalid URL")
             return
         }
+        
         
         let group = DispatchGroup()
         
@@ -53,15 +59,18 @@ class APIManager: ObservableObject {
                 let result = try decoder.decode(APIResult.self, from: data)
                 
                 DispatchQueue.main.async {
-                    self.movies = result.results
                     
-                    for i in 0..<self.movies.count {
-                        let movie = self.movies[i]
+                    var movies : [Movie]
+                    
+                    movies = result.results
+                    
+                    for i in 0..<movies.count {
+                        let movie = movies[i]
                         group.enter()
                         
                         self.getActors(movie: movie) { actors in
                             if let actors = actors {
-                                self.movies[i].actors = actors
+                                movies[i].actors = actors
                             }
                             group.leave()
                         }
@@ -75,8 +84,21 @@ class APIManager: ObservableObject {
                                     genres.append(genre.name)
                                 }
                             }
-                            self.movies[i].genres = genres
+                            movies[i].genres = genres
                         }
+                    }
+                    
+                    switch type {
+                    case "popular":
+                        self.popularMovies = movies
+                    case "top_rated":
+                        self.topRatedMovies = movies
+                    case "now_playing":
+                        self.nowPlayingMovies = movies
+                    case "search":
+                        self.searchResults = movies
+                    default:
+                        print("Error assigning movies to self")
                     }
                     
                 }

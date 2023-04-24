@@ -16,11 +16,17 @@ struct FavoritesView: View {
     
     var body: some View {
        
-            if let user = userManager.user {
+        if let user = userManager.user {
+            
+            ZStack {
+                
+                Color(red: 20/255, green: 20/255, blue: 20/255)
+                    .ignoresSafeArea()
                 VStack {
                     
                     Text("My liked movies")
-                        .font(.system(size: 22, weight: .regular))
+                        .font(.system(size: 26, weight: .bold))
+                        .foregroundColor(.white)
                     
                     ScrollView{
                         LazyVGrid(columns: columns) {
@@ -42,12 +48,13 @@ struct FavoritesView: View {
                     }
                     Spacer()
                 }
+            }
                 .onAppear {
                     userManager.getUser()
                 }
             } else {
                 LogInView(userManager: userManager)
             }
-      
+        
     }
 }
