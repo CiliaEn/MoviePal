@@ -27,7 +27,7 @@ class User: ObservableObject, Codable {
     
     func removeMovie(movie: Movie) {
         favoriteMovies = favoriteMovies.filter { $0.id != movie.id }
-            print("movie removed from favorites")
+        print("movie removed from favorites")
     }
     
     func checkForFavorite(movie: Movie) -> Bool {

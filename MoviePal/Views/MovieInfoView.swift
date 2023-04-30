@@ -12,67 +12,80 @@ struct MovieInfoView: View {
     @State var movie: Movie
     let userManager: UserManager
     let apiManager: APIManager
-    
     @State private var showAllActors = false
+    @State private var showAlert = false
     
     var body: some View {
         
-        VStack(alignment: .leading, spacing: 8) {
-            HStack{
-                VStack{
-                    MovieTrailerView(movieID: movie.id, apiManager: apiManager)
-                }
-            }
-            Text(movie.title)
-                .font(.title)
-            Text(movie.overview)
-                .font(.body)
-            Text("Release Date: \(movie.releaseDate)")
-                .font(.body)
-            HStack {
-                Text("IMDb Score:")
+        ZStack{
+            Color(red: 20/255, green: 20/255, blue: 20/255)
+                .ignoresSafeArea()
+            VStack (alignment: .leading, spacing: 8){
+                MovieTrailerView(movieID: movie.id, apiManager: apiManager)
+                    .frame(width: 360, height: 200)
+                Text(movie.title)
+                    .font(.title)
+                    .foregroundColor(.white)
+                Text(movie.overview)
                     .font(.body)
-                Text(String(format: "%.1f", movie.imdbScore))
+                    .foregroundColor(.white)
+                Text("Release Date: \(movie.releaseDate)")
                     .font(.body)
-            }
-            Text("Genre")
-                .font(.body)
-            Text("Actors: " + (showAllActors ? movie.actors.joined(separator: ", ") : movie.actors.prefix(6).joined(separator: ", ")) + "...")
-                .font(.body)
-                .lineLimit(nil)
-                .onTapGesture {
-                    self.showAllActors.toggle()
+                    .foregroundColor(.white)
+                HStack {
+                    Text("IMDb Score:")
+                        .font(.body)
+                        .foregroundColor(.white)
+                    Text(String(format: "%.1f", movie.imdbScore))
+                        .font(.body)
+                        .foregroundColor(.white)
                 }
-            
-            Button(action: {
-                if let user = userManager.user {
-                    if (user.checkForFavorite(movie: movie)) {
-                        print("removeMovie")
-                        user.removeMovie(movie: movie)
-                    } else {
-                        print("addMovie")
-                        user.addMovie(movie: movie)
+                Text("Genre: " + movie.genres.joined(separator: ", "))
+                    .font(.body)
+                    .foregroundColor(.white)
+                Text("Actors: " + (showAllActors ? movie.actors.joined(separator: ", ") : movie.actors.prefix(6).joined(separator: ", ")) + "...")
+                    .font(.body)
+                    .lineLimit(nil)
+                    .foregroundColor(.white)
+                    .onTapGesture {
+                        self.showAllActors.toggle()
                     }
-                    userManager.saveUserToFirestore()
-                } else {
-                    print("You have to log in to favorite movies")
-                }
-            }) {
-                if let user = userManager.user {
-                    if user.checkForFavorite(movie: movie) {
-                        Image(systemName: "heart.fill")
-                    } else if user.checkForFavorite(movie: movie) == false {
+                Button(action: {
+                    if let user = userManager.user {
+                        if (user.checkForFavorite(movie: movie)) {
+                            print("removeMovie")
+                            user.removeMovie(movie: movie)
+                        } else {
+                            print("addMovie")
+                            user.addMovie(movie: movie)
+                        }
+                        userManager.getUser()
+                        userManager.saveUserToFirestore()
+                    } else {
+                        showAlert = true
+                    }
+                }) {
+                    if let user = userManager.user {
+                        if user.checkForFavorite(movie: movie) {
+                            Image(systemName: "heart.fill")
+                        } else if user.checkForFavorite(movie: movie) == false {
+                            Image(systemName: "heart")
+                        }
+                    } else {
                         Image(systemName: "heart")
                     }
-                } else {
-                    Image(systemName: "heart")
                 }
+                .alert(isPresented: $showAlert) {
+                    Alert(title: Text("You are not logged in"), message: Text("You have to log in to like movies."), dismissButton: .default(Text("OK")))
+                }
+                Spacer()
             }
+            .padding()
+            .cornerRadius(10)
+            .shadow(radius: 5)
         }
-        .padding()
-        .background(Color.white)
-        .cornerRadius(10)
-        .shadow(radius: 5)
     }
     
 }
+
+

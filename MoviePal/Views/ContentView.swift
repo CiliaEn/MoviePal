@@ -11,11 +11,13 @@ import FirebaseCore
 import FirebaseAuth
 
 struct ContentView: View {
-    @ObservedObject var userManager: UserManager
+    
+    @ObservedObject var userManager : UserManager
     @ObservedObject var apiManager = APIManager()
     
     var body: some View {
-        VStack {
+        
+        VStack{
             TabView {
                 NavigationStack {
                     PopularMoviesView(apiManager: apiManager, userManager: userManager)
@@ -23,14 +25,12 @@ struct ContentView: View {
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
-                
                 NavigationStack {
                     SearchView(apiManager: apiManager, userManager: userManager)
                 }
                 .tabItem {
                     Label("Search", systemImage: "magnifyingglass")
                 }
-                
                 NavigationStack {
                     FavoritesView(apiManager: apiManager, userManager: userManager)
                 }
@@ -38,12 +38,16 @@ struct ContentView: View {
                     Label("Favorites", systemImage: "heart")
                 }
             }
+            .accentColor(Color.mint.opacity(0.7))
         }
         .onAppear {
             userManager.getUser()
+            UITabBar.appearance().barTintColor = .black
+            UITabBar.appearance().unselectedItemTintColor = .white
         }
     }
 }
+
 
 
 

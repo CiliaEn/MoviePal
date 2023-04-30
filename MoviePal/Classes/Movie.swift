@@ -15,7 +15,9 @@ struct Movie: Codable, Identifiable, Hashable {
     let releaseDate: String
     let imdbScore: Double
     let language: String
+    let genreIds: [Int]
     var actors: [String] = []
+    var genres: [String] = []
 
     enum CodingKeys: String, CodingKey {
         case id, title, overview
@@ -23,5 +25,6 @@ struct Movie: Codable, Identifiable, Hashable {
         case releaseDate = "release_date"
         case imdbScore = "vote_average"
         case language = "original_language"
+        case genreIds = "genre_ids"
     }
 }

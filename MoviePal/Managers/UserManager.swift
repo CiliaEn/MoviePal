@@ -36,7 +36,7 @@ class UserManager: ObservableObject {
         
         docRef.addSnapshotListener { (snapshot, error) in
             if let error = error {
-                print("1" + error.localizedDescription)
+                print(error.localizedDescription)
                 return
             }
             
@@ -44,7 +44,7 @@ class UserManager: ObservableObject {
             do {
                 self.user = try snapshot.data(as: User.self)
             } catch {
-                print("2" + error.localizedDescription)
+                print(error.localizedDescription)
             }
         }
     }
