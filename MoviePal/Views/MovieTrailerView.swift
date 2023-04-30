@@ -13,17 +13,17 @@ import MediaPlayer
 import MediaAccessibility
 
 struct MovieTrailerView: UIViewRepresentable {
-
+    
     let movieID: Int
     let apiManager: APIManager
-
+    
     func makeUIView(context: Context) -> WKWebView {
         let webView = WKWebView()
         webView.configuration.allowsInlineMediaPlayback = true
         webView.configuration.mediaTypesRequiringUserActionForPlayback = []
         return webView
     }
-
+    
     func updateUIView(_ uiView: WKWebView, context: Context) {
         getMovieTrailerURL { urlString in
             guard let url = URL(string: "https://www.youtube.com/embed/\(urlString)") else {return}
@@ -34,7 +34,7 @@ struct MovieTrailerView: UIViewRepresentable {
             }
         }
     }
-
+    
     func getMovieTrailerURL(completion: @escaping (String) -> Void) {
         let url = URL(string: "https://api.themoviedb.org/3/movie/\(movieID)/videos?api_key=\(apiManager.apiKey)")!
         DispatchQueue.global().async {

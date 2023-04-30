@@ -17,7 +17,6 @@ struct SplashScreenView: View {
     var body: some View {
             
         VStack {
-            
             if loaded {
                 ContentView(userManager: userManager)
             } else{
@@ -33,7 +32,6 @@ struct SplashScreenView: View {
                             Text("MoviePal")
                                 .font(Font.custom("Avenir", size: 28))
                                 .foregroundColor(.white)
-                            
                             VStack{
                                 Image("tmdb_logo")
                                     .resizable()
@@ -43,7 +41,6 @@ struct SplashScreenView: View {
                                     .foregroundColor(.white)
                             }
                             .padding()
-                            
                         }
                         .scaleEffect(size)
                         .opacity(opacity)
@@ -70,8 +67,3 @@ struct SplashScreenView: View {
     }
 }
 
-struct SplashScreenView_Previews: PreviewProvider {
-    static var previews: some View {
-        SplashScreenView()
-    }
-}

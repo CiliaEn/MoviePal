@@ -47,7 +47,6 @@ struct SearchItemView: View {
                     }
                 }
             }
-            
         }
     }
 }

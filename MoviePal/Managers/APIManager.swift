@@ -18,13 +18,13 @@ class APIManager: ObservableObject {
     @Published var genres = [Genre]()
     
     init() {
-            DispatchQueue.main.async {
-                self.loadMovies(type: "popular")
-                self.loadMovies(type: "top_rated")
-                self.loadMovies(type: "now_playing")
-                self.getGenres()
-            }
+        DispatchQueue.main.async {
+            self.loadMovies(type: "popular")
+            self.loadMovies(type: "top_rated")
+            self.loadMovies(type: "now_playing")
+            self.getGenres()
         }
+    }
     
     func loadMovies(searchWord: String? = nil, type: String) {
         var apiUrl = URL(string: "")
@@ -33,7 +33,7 @@ class APIManager: ObservableObject {
             if let url = URL(string:"https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&query=\(searchWord)") {
                 apiUrl = url
             }
-             
+            
         } else {
             if let url = URL(string: "https://api.themoviedb.org/3/movie/\(type)?api_key=\(apiKey)") {
                 apiUrl = url
@@ -44,7 +44,6 @@ class APIManager: ObservableObject {
             print("Error: Invalid URL")
             return
         }
-        
         
         let group = DispatchGroup()
         
@@ -106,7 +105,6 @@ class APIManager: ObservableObject {
                 print("Error decoding JSON: \(error.localizedDescription)")
             }
         }
-        
         task.resume()
     }
     
@@ -142,7 +140,6 @@ class APIManager: ObservableObject {
                 print(error.localizedDescription)
             }
         }
-        
         task.resume()
     }
     
@@ -183,7 +180,6 @@ class APIManager: ObservableObject {
                 completion(nil)
             }
         }
-        
         task.resume()
     }
 }
@@ -208,8 +204,6 @@ func loadPoster(movie: Movie, completion: @escaping (UIImage?) -> Void) {
     }
     task.resume()
 }
-
-
 
 struct CreditsResponse: Codable {
     let id: Int

@@ -9,10 +9,9 @@ import SwiftUI
 import UIKit
 
 struct PopularMoviesView: View {
-
+    
     @ObservedObject var apiManager : APIManager
     @ObservedObject var userManager : UserManager
-
     @State var selectedSortingOption = "Title"
     let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     
@@ -31,7 +30,6 @@ struct PopularMoviesView: View {
         ZStack{
             Color(red: 20/255, green: 20/255, blue: 20/255)
                 .ignoresSafeArea()
-            
             VStack{
                 HStack{
                     Text("Popular Movies")
@@ -56,19 +54,14 @@ struct PopularMoviesView: View {
                     }
                 }
             }
-            
         }
     }
 }
 
-
-
-
-
 struct FilterView: View {
     let sortingOptions = ["Title", "IMDb Score", "Release Date"]
     @Binding var selectedOption: String
-
+    
     var body: some View {
         HStack {
             Text("Sort by:")
@@ -81,13 +74,6 @@ struct FilterView: View {
             }
             .pickerStyle(MenuPickerStyle())
         }
-      
     }
 }
 
-struct ContentPreview: PreviewProvider {
-    static var previews: some View {
-        PopularMoviesView(apiManager: APIManager(), userManager: UserManager())
-
-    }
-}

@@ -18,12 +18,10 @@ struct LogInView: View {
     @State private var showAlert = false
     @State private var logInAlert = true
     
-    
     var body: some View {
         
             if userManager.user != nil {
                 ContentView(userManager: userManager)
-                
             } else{
                 ZStack{
                     Color(red: 20/255, green: 20/255, blue: 20/255)
@@ -78,7 +76,6 @@ struct LogInView: View {
             }
         }
     
-    
     func login() {
         
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
@@ -116,7 +113,6 @@ struct LogInView: View {
                     }
                 }
             }
-        
     }
 }
 

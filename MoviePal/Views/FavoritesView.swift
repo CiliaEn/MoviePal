@@ -11,15 +11,13 @@ struct FavoritesView: View {
     
     let apiManager : APIManager
     let userManager : UserManager
-    
     let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
-       
+        
         if let user = userManager.user {
             
             ZStack {
-                
                 Color(red: 20/255, green: 20/255, blue: 20/255)
                     .ignoresSafeArea()
                 VStack {
@@ -35,7 +33,6 @@ struct FavoritesView: View {
                         Text("You have not liked any movies.")
                             .foregroundColor(.white)
                     } else{
-                    
                         ScrollView{
                             LazyVGrid(columns: columns) {
                                 ForEach (user.favoriteMovies) { movie in
@@ -64,15 +61,13 @@ struct FavoritesView: View {
                     }
                     .padding(.horizontal, 40)
                     .padding(.bottom, 5)
-                    
                 }
             }
-                .onAppear {
-                    userManager.getUser()
-                }
-            } else {
-                LogInView(userManager: userManager)
+            .onAppear {
+                userManager.getUser()
             }
-        
+        } else {
+            LogInView(userManager: userManager)
+        }
     }
 }

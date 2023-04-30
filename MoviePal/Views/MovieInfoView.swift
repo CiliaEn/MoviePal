@@ -12,7 +12,6 @@ struct MovieInfoView: View {
     @State var movie: Movie
     let userManager: UserManager
     let apiManager: APIManager
-    
     @State private var showAllActors = false
     @State private var showAlert = false
     
@@ -21,11 +20,9 @@ struct MovieInfoView: View {
         ZStack{
             Color(red: 20/255, green: 20/255, blue: 20/255)
                 .ignoresSafeArea()
-            
             VStack (alignment: .leading, spacing: 8){
                 MovieTrailerView(movieID: movie.id, apiManager: apiManager)
                     .frame(width: 360, height: 200)
-                
                 Text(movie.title)
                     .font(.title)
                     .foregroundColor(.white)
@@ -53,7 +50,6 @@ struct MovieInfoView: View {
                     .onTapGesture {
                         self.showAllActors.toggle()
                     }
-                
                 Button(action: {
                     if let user = userManager.user {
                         if (user.checkForFavorite(movie: movie)) {
@@ -80,8 +76,8 @@ struct MovieInfoView: View {
                     }
                 }
                 .alert(isPresented: $showAlert) {
-                            Alert(title: Text("You are not logged in"), message: Text("You have to log in to like movies."), dismissButton: .default(Text("OK")))
-                        }
+                    Alert(title: Text("You are not logged in"), message: Text("You have to log in to like movies."), dismissButton: .default(Text("OK")))
+                }
                 Spacer()
             }
             .padding()
