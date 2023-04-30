@@ -20,8 +20,6 @@ struct SplashScreenView: View {
             
             if loaded {
                 ContentView(userManager: userManager)
-                
-                
             } else{
                 ZStack{
                     
@@ -29,12 +27,23 @@ struct SplashScreenView: View {
                         .ignoresSafeArea()
                     VStack{
                         VStack{
-                            Image(systemName: "camera.macro")
+                            Image(systemName: "film")
                                 .font(.system(size: 80))
-                                .foregroundColor(Color(red: 0.86, green: 0.64, blue: 1.13))
+                                .foregroundColor(Color.mint.opacity(0.7))
                             Text("MoviePal")
-                                .font(Font.custom("Avenir", size: 26))
-                                .foregroundColor(.black.opacity(0.80))
+                                .font(Font.custom("Avenir", size: 28))
+                                .foregroundColor(.white)
+                            
+                            VStack{
+                                Image("tmdb_logo")
+                                    .resizable()
+                                    .frame(width: 60, height: 30)
+                                Text("This product uses the TMDB API but is not endorsed or certified by TMDB")
+                                    .font(Font.custom("Avenir", size: 10))
+                                    .foregroundColor(.white)
+                            }
+                            .padding()
+                            
                         }
                         .scaleEffect(size)
                         .opacity(opacity)
@@ -58,7 +67,6 @@ struct SplashScreenView: View {
                 .onAppear {
                     userManager.getUser()
                 }
-        
     }
 }
 

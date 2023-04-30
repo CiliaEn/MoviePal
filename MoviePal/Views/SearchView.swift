@@ -15,7 +15,6 @@ struct SearchView: View {
     
     let columns = [GridItem(.flexible())]
  
-    
     var searchResults: [Movie] {
         if searchText.isEmpty {
             let emptyList = [Movie]()
@@ -43,7 +42,6 @@ struct SearchView: View {
                         Spacer()
                     }
                     
-                    
                     ScrollView(.horizontal){
                         LazyHGrid(rows: columns, spacing: 8) {
                             
@@ -58,10 +56,9 @@ struct SearchView: View {
                             }
                         }
                     }
+                    .padding(.horizontal, 10)
                     .frame(height: 200)
-                    
                 }
-                
                     VStack{
                         HStack {
                             Text("Now playing in theaters")
@@ -70,7 +67,6 @@ struct SearchView: View {
                                 .padding(.leading)
                             Spacer()
                         }
-                        
                         ScrollView(.horizontal){
                             LazyHGrid(rows: columns, spacing: 8) {
                                 
@@ -85,29 +81,33 @@ struct SearchView: View {
                                 }
                             }
                         }
+                        .padding(.horizontal, 10)
                         .frame(height: 200)
-                       
                     }
                     } else {
-                        List {
-                            ForEach(searchResults, id: \.self) { movie in
-                                NavigationLink(
-                                    destination: MovieInfoView(movie: movie, userManager: userManager, apiManager: apiManager),
-                                    label: {
-                                        SearchItemView(movie: movie)
-                                    }
-                                )
+                        VStack{
+                            ScrollView(.vertical) {
+                                ForEach(searchResults, id: \.self) { movie in
+                                    NavigationLink(
+                                        destination: MovieInfoView(movie: movie, userManager: userManager, apiManager: apiManager),
+                                        label: {
+                                            SearchItemView(movie: movie)
+                                        }
+                                    )
+                                }
                             }
                             
                         }
-                        .listStyle(PlainListStyle())
                         
+                              
                     }
+                Spacer()
                 }
+            
             }
+        
             .searchable(text: $searchText)
-            
-            
+            .foregroundColor(Color.white)
         }
     }
   

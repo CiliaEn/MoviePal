@@ -33,10 +33,10 @@ struct SearchItemView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Text(movie.title)
                         .font(.system(size: 12, weight: .regular))
-                        .foregroundColor(.black)
+                        .foregroundColor(.white)
                     Text(String(format: "%.1f", movie.imdbScore))
                         .font(.system(size: 10, weight: .regular))
-                        .foregroundColor(.black)
+                        .foregroundColor(.white)
                 }
                 Spacer()
             }

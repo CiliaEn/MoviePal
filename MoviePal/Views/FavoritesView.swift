@@ -23,30 +23,48 @@ struct FavoritesView: View {
                 Color(red: 20/255, green: 20/255, blue: 20/255)
                     .ignoresSafeArea()
                 VStack {
+                    HStack{
+                        Text("Liked Movies")
+                            .font(.system(size: 26, weight: .bold))
+                            .foregroundColor(.white)
+                            .padding()
+                        Spacer()
+                    }
+                    Spacer()
+                    if (user.favoriteMovies.isEmpty){
+                        Text("You have not liked any movies.")
+                            .foregroundColor(.white)
+                    } else{
                     
-                    Text("My liked movies")
-                        .font(.system(size: 26, weight: .bold))
-                        .foregroundColor(.white)
-                    
-                    ScrollView{
-                        LazyVGrid(columns: columns) {
-                            ForEach (user.favoriteMovies) { movie in
-                                
-                                NavigationLink(
-                                    destination: MovieInfoView(movie: movie, userManager: userManager, apiManager: apiManager),
-                                    label: {
-                                        GridItemView(movie: movie)
-                                    }
-                                )
+                        ScrollView{
+                            LazyVGrid(columns: columns) {
+                                ForEach (user.favoriteMovies) { movie in
+                                    
+                                    NavigationLink(
+                                        destination: MovieInfoView(movie: movie, userManager: userManager, apiManager: apiManager),
+                                        label: {
+                                            GridItemView(movie: movie)
+                                        }
+                                    )
+                                }
                             }
                         }
+                        .padding(.horizontal, 20)
                     }
+                    Spacer()
                     Button(action: {
                         userManager.signOut()
                     }) {
                         Text("Sign out")
+                            .foregroundColor(.white)
+                            .frame( maxHeight: 5)
+                            .padding()
+                            .background(Color.mint.opacity(0.7))
+                            .cornerRadius(5.0)
                     }
-                    Spacer()
+                    .padding(.horizontal, 40)
+                    .padding(.bottom, 5)
+                    
                 }
             }
                 .onAppear {

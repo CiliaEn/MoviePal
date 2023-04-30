@@ -14,6 +14,7 @@ struct MovieInfoView: View {
     let apiManager: APIManager
     
     @State private var showAllActors = false
+    @State private var showAlert = false
     
     var body: some View {
         
@@ -21,9 +22,9 @@ struct MovieInfoView: View {
             Color(red: 20/255, green: 20/255, blue: 20/255)
                 .ignoresSafeArea()
             
-            
             VStack (alignment: .leading, spacing: 8){
                 MovieTrailerView(movieID: movie.id, apiManager: apiManager)
+                    .frame(width: 360, height: 200)
                 
                 Text(movie.title)
                     .font(.title)
@@ -62,9 +63,10 @@ struct MovieInfoView: View {
                             print("addMovie")
                             user.addMovie(movie: movie)
                         }
+                        userManager.getUser()
                         userManager.saveUserToFirestore()
                     } else {
-                        print("You have to log in to favorite movies")
+                        showAlert = true
                     }
                 }) {
                     if let user = userManager.user {
@@ -77,6 +79,10 @@ struct MovieInfoView: View {
                         Image(systemName: "heart")
                     }
                 }
+                .alert(isPresented: $showAlert) {
+                            Alert(title: Text("You are not logged in"), message: Text("You have to log in to like movies."), dismissButton: .default(Text("OK")))
+                        }
+                Spacer()
             }
             .padding()
             .cornerRadius(10)
